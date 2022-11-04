@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingelogd - Precise IT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Precise IT Website"/>
+    <meta name="author" content="Bart Reijnders, Arjen Froma"/>
+
+    <div th:replace="fragments/general.html :: headerfiles"></div>
+
+
+</head>
+<body>
+<div th:replace="fragments/general.html :: header-menu"></div>
+<div class="px-4 py-5 my-5 pit-page-title">
+    <div class="container">
+        <h1 class="float-start">Welkom ingelogde gebruiker!</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row pit-home-starttext">
+        <div class="col-md-6">
+            <p>Vul het onderstaande formulier in om in te loggen in het helpdesk systeem van Precise IT.</p>
+
+            <p>
+                <ul>
+                    <li><a href="/user/home">your personal page</a></li>
+                    <li><a href="/logout">log out</a></li>
+                </ul>
+            </p>
+
+        </div>
+        <div class="col-md-6">
+            <img src="images/contact-image.png">
+
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/general.html :: footer"></div>
+</main>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+
+</body>
+</html>

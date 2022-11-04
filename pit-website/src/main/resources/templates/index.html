@@ -7,44 +7,12 @@
     <meta name="description" content="Precise IT Website"/>
     <meta name="author" content="Bart Reijnders, Arjen Froma"/>
 
-    <!--    Boostrap core files-->
-    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
-
-    <!--    Jquery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-    <!--    Fontawesome files-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <!--    Google font files-->
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
-
-    <!--    Custom CSS and JS-->
-    <link href="../static/css/custom-css.css" rel="stylesheet" th:href="@{/css/custom-css.css}"/>
-    <script src="../js/custom-js.js" th:href="@{/js/custom-js.js}"></script>
+    <div th:replace="fragments/general.html :: headerfiles"></div>
 
 
 </head>
 <body>
-<div class="container">
-    <header class="pit-header d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-            <img class="pit-logo" alt="Precise IT Blue with Black Logo" src="../images/preciseit-logo.png">
-        </a>
-        <i class="fa-solid fa-bars mobile-icon"></i>
-
-        <ul class="nav nav-pills mobile-nav">
-            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
-            <li class="nav-item nav-item-border"><a href="#" class="nav-link">ICT-Oplossingen</a></li>
-            <li class="nav-item nav-item-border"><a href="#" class="nav-link">Cases</a></li>
-            <li class="nav-item nav-item-border"><a href="#" class="nav-link">Over ons</a></li>
-            <li class="nav-item nav-item-border"><a href="/preciseit-frontend/contact.html" class="nav-link">Contact</a></li>
-            <li class="nav-item nav-item-button"><a href="#" class="nav-link">Helpdesk Portaal</a></li>
-        </ul>
-    </header>
-</div>
+<div th:replace="fragments/general.html :: header-menu"></div>
 <div class="px-4 py-5 my-5 text-center pit-home-hero">
     <div class="pit-hero-right-image"></div>
     <h1 class="display-5 fw-bold" th:text="'Welkom bij ' + ${companyname}"></h1>
@@ -98,13 +66,8 @@
             </div>
         </div>
 </div>
-<footer>
-    <div class="container">
-        <p class="float-end"><a href="#">Privacy</a> &middot; <a href="#">Terms</a> &middot;  <a href="#">Back to top</a></p>
-        <p>&copy; 2022 Precise IT &middot; All Right Reserverd </p>
-    </div>
-</footer>
-
+<div th:replace="fragments/general.html :: footer"></div>
+</main>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
