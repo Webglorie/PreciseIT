@@ -4,8 +4,11 @@ package com.preciseIT.entities;
 
 
 import com.preciseIT.enums.UserRoles;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,6 +29,16 @@ public class Person {
     private String passwordHash;
     @Column(name = "passwordsalt", nullable = false)
     private String passwordSalt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "createdAt", nullable = false, updatable = false)
+    @CreatedDate
+    private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "lastModified", nullable = false)
+    @LastModifiedDate
+    private Date lastModified;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "userRole", joinColumns = @JoinColumn(name = "id"))
@@ -86,5 +99,21 @@ public class Person {
 
     public void setUserRoles(List<UserRoles> userRoles) {
         this.userRoles = userRoles;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
     }
 }
