@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Precise IT Homepagina</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Precise IT Website"/>
+    <meta name="author" content="Bart Reijnders, Arjen Froma"/>
+
+    <!--    Boostrap core files-->
+    <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+
+    <!--    Jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!--    Fontawesome files-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!--    Google font files-->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+    <!--    Custom CSS and JS-->
+    <link href="../static/css/custom-css.css" rel="stylesheet" th:href="@{/css/custom-css.css}"/>
+    <script src="../js/custom-js.js" th:href="@{/js/custom-js.js}"></script>
+
+
+</head>
+<body>
+<div class="container">
+    <header class="pit-header d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img class="pit-logo" alt="Precise IT Blue with Black Logo" src="../images/preciseit-logo.png">
+        </a>
+        <i class="fa-solid fa-bars mobile-icon"></i>
+
+        <ul class="nav nav-pills mobile-nav">
+            <li class="nav-item"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item nav-item-border"><a href="#" class="nav-link">ICT-Oplossingen</a></li>
+            <li class="nav-item nav-item-border"><a href="#" class="nav-link">Cases</a></li>
+            <li class="nav-item nav-item-border"><a href="#" class="nav-link">Over ons</a></li>
+            <li class="nav-item nav-item-border"><a href="/preciseit-frontend/contact.html" class="nav-link">Contact</a></li>
+            <li class="nav-item nav-item-button"><a href="#" class="nav-link">Helpdesk Portaal</a></li>
+        </ul>
+    </header>
+</div>
+<div class="px-4 py-5 my-5 text-center pit-home-hero">
+    <div class="pit-hero-right-image"></div>
+    <h1 class="display-5 fw-bold" th:text="'Welkom bij ' + ${companyname}"></h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4" th:text="${companyslogan}"></p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="button" class="btn btn-style-1 btn-lg px-4 gap-3">Bekijk onze ICT oplossingen</button>
+            <button type="button" class="btn btn-style-2 btn-lg px-4">Lees onze succesverhalen</button>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row pit-home-starttext">
+        <div class="col-md-6">
+            <h2>Wij zijn <b>Precise IT</b>.</h2>
+            <p>Jij wilt niet alleen dat de ICT in je organisatie efficiënt, veilig én op een beheersbare manier geregeld is, maar je bent op zoek naar een partner die verder kijkt dan vandaag en jouw vraag. Iemand die je kan adviseren, samen met jou kosten weet te besparen en als expert met je meedenkt.</p>
+
+            <p>Wij helpen je zichtbaar te maken wat ICT voor jou bedrijf kan betekenen. Processen vereenvoudigen, risico’s analyseren, stabiliteit garanderen en kosten besparen door net iets slimmer te zijn of onnodige uitval te voorkomen.</p>
+        </div>
+        <div class="col-md-6">
+            <img class="pit-home-first-image" src="../images/homepage-content-image.png">
+
+        </div>
+    </div>
+</div>
+
+<div class="px-4 py-5 my-5 text-center pit-home-helpen">
+    <h2 class="display-5">Hoe kunnen we u helpen?</h2>
+        <div class="col-lg-6 mx-auto">
+            <p>Onze medewerkers helpen jou graag met ICT-beveiliging. Geef aan ons door hoeveel werkplekken jij nodig hebt en het niveau van beveiliging die jij wilt hebben. Hierna krijg je direct een prijsopgave per gebruiker te zien.</p>
+            <div class="pit-home-company-tool">
+                <h3>Uit hoeveel medewerkers bestaat uw organisatie?</h3>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                    <div class="pit-company-box">
+                        <img class="pit-people-image" src="../images/pit-people-icon.png">
+                        <span class="pit-company-box-title">1-10</span>
+                    </div>
+                    <div class="pit-company-box">
+                        <img class="pit-people-image" src="../images/pit-people-icon.png">
+                        <span class="pit-company-box-title">1-10</span>
+                    </div>
+                    <div class="pit-company-box">
+                        <img class="pit-people-image" src="../images/pit-people-icon.png">
+                        <span class="pit-company-box-title">1-10</span>
+                    </div>
+                    <div class="pit-company-box">
+                        <img class="pit-people-image" src="../images/pit-people-icon.png">
+                        <span class="pit-company-box-title">1-10</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<footer>
+    <div class="container">
+        <p class="float-end"><a href="#">Privacy</a> &middot; <a href="#">Terms</a> &middot;  <a href="#">Back to top</a></p>
+        <p>&copy; 2022 Precise IT &middot; All Right Reserverd </p>
+    </div>
+</footer>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+
+</body>
+</html>

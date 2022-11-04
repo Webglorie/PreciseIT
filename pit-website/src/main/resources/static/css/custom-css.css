@@ -1,0 +1,250 @@
+p, h1, h2, h3, h4, h5, b, body{
+	color: #333333;
+	font-family: 'Montserrat', sans-serif;
+	
+
+}
+body{
+	overflow-x: hidden;
+}
+/* Header css */
+ul.nav.nav-pills {
+    margin-top: 12px;
+	display: flex;
+}
+.nav-link:focus, .nav-link:hover {
+    color: #0072d6;
+}
+.nav-link {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #333333;
+    text-decoration: none;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #0072d6;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: inherit;
+    background-color: inherit;
+    font-weight: 600;
+}
+.mobile-icon {
+    position: absolute;
+    right: 40px;
+    font-size: 24px;
+    top: 30px;
+	display: none;
+}
+.nav-item-button a {
+    color: #fff;
+    background-color: #0072d6!important;
+    border-radius: 5px!important;
+    font-size: 16px;
+    padding: 8px 15px;
+}
+.pit-logo {
+    max-width: 310px;
+}
+.pit-home-hero {
+    background-color: #0072d6;
+    color: #fff;
+    position: relative;
+    margin-top: -25px!important;
+	max-height: 234px;
+}
+.pit-home-hero h1, .pit-home-hero p {
+	    color: #fff!important;
+}
+.pit-hero-right-image:before {
+    content: url(../images/pit-hero-right-image.png);
+    position: absolute;
+    right: -1px;
+    top: 0px;
+}
+.pit-home-hero {
+    padding-top: 2.1rem!important;
+    padding-bottom: 2.1rem!important;
+}
+.pit-home-hero p {
+    margin: 18px;
+}
+.pit-home-hero h1 {
+    font-size: 42px;
+}
+.btn-style-1 {
+    background-color: #EA5143;
+    border-radius: 6px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 17px;
+    height: 40px;
+	color: #fff;
+}
+.pit-home-starttext h2 {
+    font-weight: 400;
+    margin-top: 3rem;
+    margin-bottom: 20px;
+}
+.pit-home-starttext p {
+    line-height: 25px;
+}
+.mobile-icon {
+display: none;
+}	
+.btn-style-2 {
+    background-color: #36a967;
+    border-radius: 6px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 17px;
+    height: 40px;
+    color: #fff;
+}
+.pit-home-first-image {
+    max-width: 500px;
+    width: 100%;
+}
+.pit-home-helpen {
+    background-color: #ECF3FA;
+}
+.pit-home-helpen h2.display-5 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+.pit-home-helpen p {
+    max-width: 784px;
+    margin: auto;
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+.pit-home-company-tool {
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px;
+}
+.pit-home-company-tool h3 {
+    font-size: 21px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+.pit-company-box {
+    border: 1px solid #C2DAF3;
+    width: 180px;
+    height: 180px;
+	border-radius: 10px;
+}
+img.pit-people-image {
+    display: block;
+    margin: 15px auto;
+}
+.pit-company-box {
+    border: 1px solid #C2DAF3;
+    width: 180px;
+    height: 100%;
+    padding: 10px 10px;
+    border-radius: 10px;
+}
+.pit-company-box:hover {
+    border: 2px solid #C2DAF3;
+	cursor: pointer;
+    background-color: #d2ffd2;
+}
+
+/* Footer css */
+.pit-footer-links{
+	float: right;
+}
+footer {
+    background-color: #F2F2F2;
+    padding: 20px;
+    margin-top: 40px;
+}
+footer p {
+    margin-bottom: 0px!important;
+}
+
+/* Default Page template css */
+
+.pit-page-title h1.float-start {
+    color: #fff!important;
+    display: contents;
+    font-weight: 300;
+    font-size: 36px;
+}
+.pit-page-title {
+    background-color: #0072d6;
+    padding: 30px!important;
+    margin-top: -25px!important;
+    margin-bottom: 20px!important;
+}
+
+/* Forms CSS */
+
+label.form-label {
+    font-weight: 500;
+}
+
+/* Media querys for all devices */
+
+@media only screen and (max-width: 1999px) {
+.pit-header a.me-md-auto{
+	    margin: 0px!important;
+}
+.btn-style-1,.btn-style-2{
+	padding-right: 1rem!important;
+    padding-left: 1rem!important;
+	font-size: 15px;
+	
+}
+}
+@media only screen and (max-width: 1020px) {
+.pit-hero-right-image{
+	display:none;
+}
+.pit-home-hero {
+    max-height: inherit;
+}
+
+}
+@media only screen and (max-width: 768px) {
+.mobile-icon {
+display: block;
+}
+
+ul.nav.nav-pills, .mobile-nav{
+display:none;
+}	
+.mobile-nav {
+    width: 100%!important;
+    padding: 5px;
+}
+.mobile-nav li.nav-item{
+    width: 100%;
+    border-bottom: 1px solid #dddddd;
+}
+
+.pit-home-company-tool div.d-grid.gap-2.d-sm-flex{
+    display: flex!important;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.pit-company-box {
+    width: 47%!important;
+}
+
+footer .float-end a, footer p {
+    width: 100%;
+    text-align: center;
+}
+p.float-end {
+    width: 100%!important;
+    display: flex;
+	margin-bottom: 20px!important;
+    flex-wrap: wrap;
+}
+}
