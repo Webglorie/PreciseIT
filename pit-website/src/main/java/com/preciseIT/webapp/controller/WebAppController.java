@@ -5,14 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class WebAppController {
     private final String appMode;
 
-    @Autowired
-    public WebAppController(Environment environment){
+
+    public WebAppController( Environment environment){
         appMode = environment.getProperty("app-mode");
     }
 
@@ -26,28 +27,31 @@ public class WebAppController {
         return "index";
     }
 
-    @RequestMapping("/contact")
+    @GetMapping("/contact")
     public String contact(){
 
         return "contact";
     }
 
-    @RequestMapping("/portaal/home")
+    @GetMapping("/portaal/home")
     public String showPortaal() {
         return "portaal";
     }
 
-    @RequestMapping("/portaal/inloggen")
+
+    @GetMapping("/portaal/inloggen")
     public String showPortalLogin(){
         return "portaal-login";
     }
 
-    @RequestMapping("/portaal/registreren")
+
+    @GetMapping("/portaal/registreren")
     public String showPortalRegistration(){
         return "portaal-registration";
     }
 
-    @RequestMapping("/portaal/uitloggen")
+
+    @GetMapping("/portaal/uitloggen")
     public String showPortalLogout(){
         return "portaal-logout";
     }
