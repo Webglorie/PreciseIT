@@ -4,53 +4,54 @@ package com.preciseIT.entities;
 
 
 import com.preciseIT.enums.UserRoles;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "person")
-public class Person {
-    @Id
-    @Column(name = "id", nullable = false)
-    @GeneratedValue
-    private UUID id;
+public class Person extends AbstractAuditable<Person, UUID> {
+
     @Column(name = "email", nullable = false)
     private String email;
     @Column(name = "firstname")
     private String firstName;
     @Column(name = "lastname")
     private String lastName;
-    @Column(name = "passwordhash", nullable = false)
-    private String passwordHash;
-    @Column(name = "passwordsalt", nullable = false)
-    private String passwordSalt;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "createdAt", nullable = false, updatable = false)
-    @CreatedDate
-    private Date createdAt;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "lastModified", nullable = false)
-    @LastModifiedDate
-    private Date lastModified;
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "userRole", joinColumns = @JoinColumn(name = "id"))
     @Enumerated(value = EnumType.STRING)
     private List<UserRoles> userRoles = List.of(UserRoles.CLIENT);
 
-    public UUID getId() {
-        return id;
+    public Person(String email, String firstName, String lastName, String password, List<UserRoles> userRoles) {
+        this.setCreatedDate(LocalDateTime.now());
+        this.setLastModifiedDate(LocalDateTime.now());
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.userRoles = userRoles;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public Person(String email, String firstName, String lastName, String password) {
+        this.setCreatedDate(LocalDateTime.now());
+        this.setLastModifiedDate(LocalDateTime.now());
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.userRoles = List.of(UserRoles.CLIENT);
+    }
+
+    public Person() {
     }
 
     public String getEmail() {
@@ -77,21 +78,14 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String passwordHash) {
+        this.password = passwordHash;
     }
 
-    public String getPasswordSalt() {
-        return passwordSalt;
-    }
-
-    public void setPasswordSalt(String passwordSalt) {
-        this.passwordSalt = passwordSalt;
-    }
 
     public List<UserRoles> getUserRoles() {
         return userRoles;
@@ -99,21 +93,5 @@ public class Person {
 
     public void setUserRoles(List<UserRoles> userRoles) {
         this.userRoles = userRoles;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(Date lastModified) {
-        this.lastModified = lastModified;
     }
 }

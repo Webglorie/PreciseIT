@@ -1,12 +1,8 @@
 package com.preciseIT.entities;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +24,10 @@ public class Ticket extends AbstractAuditable<Person, UUID> {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "ticket_id")
     private List<Comment> comments;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product subjectProduct;
 
     public void setTitle(String title) {
         this.title = title;
