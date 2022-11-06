@@ -1,25 +1,23 @@
 package com.preciseIT.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
-    private String username;
+    private Long id;
+    @NotEmpty(message = "Email should not be empty")
+    @Email
+    private String email;
     private String password;
     private String secret;
 
-    public User(String username, String password, String secret) {
-        this.username = username;
-        this.password = password;
-        this.secret = secret;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getSecret() {
-        return secret;
-    }
 }
