@@ -15,9 +15,9 @@
 <div th:replace="fragments/general.html :: header-menu"></div>
 <div class="px-4 py-5 my-5 text-center pit-home-hero">
     <div class="pit-hero-right-image"></div>
-    <h1 class="display-5 fw-bold" th:text="'Welkom bij ' + ${companyname}"></h1>
+    <h1 class="display-5 fw-bold">Welkom bij Precise IT!</h1>
     <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4" th:text="${companyslogan}"></p>
+        <p class="lead mb-4">U zorgt voor uw cliënten. Wij zorgen voor u. Dat is één zorg minder.</p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
             <button type="button" class="btn btn-style-1 btn-lg px-4 gap-3">Bekijk onze ICT oplossingen</button>
             <button type="button" class="btn btn-style-2 btn-lg px-4">Lees onze succesverhalen</button>
@@ -72,7 +72,7 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="../js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+<script src="../js/bootstrap.js" th:href="@{/static/js/bootstrap.js}"></script>
 
 </body>
 </html>

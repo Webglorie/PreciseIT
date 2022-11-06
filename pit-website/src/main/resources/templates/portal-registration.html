@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registreren Helpdesk Portaal - Precise IT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Precise IT Website"/>
+    <meta name="author" content="Bart Reijnders, Arjen Froma"/>
+
+    <div th:replace="fragments/general.html :: headerfiles"></div>
+
+
+</head>
+<body>
+<div th:replace="fragments/general.html :: header-menu"></div>
+<div class="px-4 py-5 my-5 pit-page-title">
+    <div class="container">
+        <h1 class="float-start">Registeren</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row pit-home-starttext">
+        <div class="col-md-6">
+            <p>Vul het onderstaande formulier in voor het aanmaken van een Precise IT helpdesk account.</p>
+
+            <div class="custom-container container">
+                <div class="form-group">
+                    <label for="username">Gebruikersnaam: </label>
+                    <input class="form-control" id="username" placeholder="Voer een gebruikersnaam in" type="text"/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Wachtwoord: </label>
+                    <input class="form-control" id="password" placeholder="Enter password" type="password"/>
+                </div><br>
+                <button class="btn btn-primary" id="btnRegister" type="button">Registreren</button>
+                <button class="btn btn-outline-primary" id="btnCancelRegister" type="button">Annuleren</button>
+            </div>
+
+            <div class="modal fade" id="modalRegister" role="dialog" tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Configureer uw token</h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                Om de registratie te voltooien, moet u uw token configureren in de Google Authenticator-toepassing. Jij
+                                heeft deze token verder nodig om in te kunnen loggen.
+                            </p>
+                            <p>Scan de hieronder weergegeven QR-code of voer de token handmatig in.</p>
+                            <div class="text-center">
+                                <img class="img-thumbnail" id="tokenQr" src=""/>
+                                <h3><span id="tokenValue"></span></h3>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" data-dismiss="modal" id="btnRegisterDone" type="button">Klaar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <img src="../images/contact-image.png">
+
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/general.html :: footer"></div>
+</main>
+
+<div th:replace="fragments/general.html :: footerfiles"></div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inloggen Helpdesk Portaal - Precise IT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Precise IT Website"/>
+    <meta name="author" content="Bart Reijnders, Arjen Froma"/>
+
+    <div th:replace="fragments/general.html :: headerfiles"></div>
+
+
+</head>
+<body>
+<div th:replace="fragments/general.html :: header-menu"></div>
+<div class="px-4 py-5 my-5 pit-page-title">
+    <div class="container">
+        <h1 class="float-start">Inloggen bij Precise IT</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row pit-home-starttext">
+        <div class="col-md-6">
+            <div th:if="${usermsg}">
+                <span class="info" th:text="${usermsg}"></span>
+            </div>
+            <p>Vul het onderstaande formulier in om in te loggen in het helpdesk systeem van Precise IT.</p>
+
+            <div class="custom-container container">
+                <div class="alert alert-danger collapse" id="msgLoginFailed" role="alert">
+                    Opgegeven gebruikersnaam of wachtwoord kon niet worden gevonden
+                </div>
+                <div class="form-group">
+                    <label for="username">Gebruikersnaam: </label>
+                    <input class="form-control" id="username" placeholder="Voer een gebruikersnaam in" type="text"/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Wachtwoord: </label>
+                    <input class="form-control" id="password" placeholder="Voer een wachtwoord in" type="password"/>
+                </div>
+                <br>
+                <button class="btn btn-primary" id="btnLogin" type="button">Inloggen</button>
+                <button class="btn btn-outline-primary" id="btnCancelLogin" type="button">Annuleren</button>
+            </div>
+
+            <div class="modal fade" id="modalLoginCheckToken" role="dialog" tabindex="-1">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Verifieer uw token</h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="alert alert-danger collapse" id="msgTokenCheckFailed" role="alert">
+                                Opgegeven token kon niet worden gevonden
+                            </div>
+                            <p>
+                                Om de aanmelding te voltooien, moet u uw token verifiëren die is gegenereerd in de Google Authenticator-toepassing.
+                                Voer de momenteel gegenereerde token in het onderstaande veld in
+                            </p>
+                            <div class="text-center">
+                                <input id="loginToken" placeholder="Voer een token in" type="text"/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" id="btnTokenVerify" type="button">Verifiëren</button>
+                            <button class="btn btn-secondary" data-dismiss="modal" type="button">Annuleren</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>
+            <ul>
+                <li><a href="/portal/registration">Klik hier om te registreren (Voor testdoeleinden)</a></li>
+            </ul>
+            </p>
+
+
+        </div>
+        <div class="col-md-6">
+            <img src="../images/contact-image.png">
+
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/general.html :: footer"></div>
+</main>
+
+<div th:replace="fragments/general.html :: footerfiles"></div>
+</body>
+</html>

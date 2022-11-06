@@ -9,6 +9,7 @@
         <module>api-service</module>
         <module>H2persistence</module>
         <module>Main</module>
+        <module>Authentication</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

@@ -6,9 +6,6 @@
     <!--    Boostrap core files-->
     <link href="../../../../../../../PreciseIT/web/src/main/resources/static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 
-    <!--    Jquery-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
     <!--    Fontawesome files-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -19,7 +16,7 @@
 
     <!--    Custom CSS and JS-->
     <link href="../../../../../../../PreciseIT/web/src/main/resources/static/css/custom-css.css" rel="stylesheet" th:href="@{/css/custom-css.css}"/>
-    <script src="../js/custom-js.js" th:href="@{/js/custom-js.js}"></script>
+
 
 </head>
 <body>
@@ -36,7 +33,7 @@
             <li class="nav-item nav-item-border"><a href="#" class="nav-link">Cases</a></li>
             <li class="nav-item nav-item-border"><a href="#" class="nav-link">Over ons</a></li>
             <li class="nav-item nav-item-border"><a href="/contact" class="nav-link">Contact</a></li>
-            <li class="nav-item nav-item-button"><a href="/portaal/inloggen" class="nav-link">Helpdesk Portaal</a></li>
+            <li class="nav-item nav-item-button"><a href="/portal/login" class="nav-link">Helpdesk Portaal</a></li>
         </ul>
     </header>
 </div>
@@ -47,5 +44,20 @@
         <p>&copy; 2022 Precise IT &middot; All Right Reserverd </p>
     </div>
 </footer>
+<span th:fragment="footerfiles">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script
+        src="https://code.jquery.com/jquery-3.2.1.js"
+        integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+        crossorigin="anonymous"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+<script src="../js/custom-js.js" th:href="@{/js/custom-js.js}"></script>
+</span>
 </body>
 </html>
