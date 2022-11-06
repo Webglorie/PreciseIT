@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.*;
 public class PersonController {
 
     private final PersonRepository personRepository;
-    private final DummyData dummyData;
 
     public PersonController(@Autowired PersonRepository personRepository) {
         this.personRepository = personRepository;
-        this.dummyData = new DummyData(this.personRepository);
     }
 
     @GetMapping()

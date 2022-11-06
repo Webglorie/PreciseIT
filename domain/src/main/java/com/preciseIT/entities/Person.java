@@ -15,7 +15,8 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "person")
-public class Person extends AbstractAuditable<Person, UUID> {
+public class Person extends AbstractAuditable<Person, Integer> {
+
 
     @Column(name = "email", nullable = false)
     private String email;

@@ -8,7 +8,16 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "ticket")
-public class Ticket extends AbstractAuditable<Person, UUID> {
+public class Ticket extends AbstractAuditable<Person, Integer> {
+
+    public Ticket() {
+    }
+
+    public Ticket(String title, Person questioner, Person assignee) {
+        this.title = title;
+        this.questioner = questioner;
+        this.assignee = assignee;
+    }
 
     @Column(name = "title", nullable = false)
     private String title;
