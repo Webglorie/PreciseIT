@@ -13,10 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    private Long id;
-    @NotEmpty(message = "Email should not be empty")
-    @Email
-    private String email;
+    private String username;
     private String password;
     private String secret;
 
