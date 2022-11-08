@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EntityScan(basePackages = {"com.preciseIT.entities", "com.preciseIT.enums"})
 @EnableJpaRepositories(basePackages = {"com.preciseIT.repos"})
-@ComponentScan(basePackages = {"com.preciseIT.controllers", "com.preciseIT.webapp.controller", "com.preciseIT"})
+@ComponentScan(basePackages = {"com.preciseIT.controllers", "com.preciseIT.webapp.controller", "com.preciseIT", "com.preciseIT.auth"})
 public class MainApplication {
 
 
