@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/person")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserRepository userRepository;
 
     public UserController(@Autowired UserRepository userRepository) {
-        this.userRepository =userRepository;
+        this.userRepository = userRepository;
     }
 
-    @GetMapping()
+    @GetMapping
     public Iterable<User> getAllPersons() {
         return userRepository.findAll();
     }

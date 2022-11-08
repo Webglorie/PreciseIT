@@ -30,6 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.js",
+                        "/users/*",
+                        "/users",
                         "/h2-console**",
                         "/h2-console",
                         "/h2-console/**",
