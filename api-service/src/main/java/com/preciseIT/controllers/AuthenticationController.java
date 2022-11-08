@@ -1,4 +1,4 @@
-package com.preciseIT.webapp.controller;
+package com.preciseIT.controllers;
 
 import com.preciseIT.auth.service.TotpService;
 import com.preciseIT.auth.service.UserService;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/authenticate/", method = RequestMethod.POST)
-public class AuthenticationRestController {
+public class AuthenticationController {
 
     @Autowired
     private UserService userService;

@@ -32,7 +32,7 @@ $("#btnLogin").click(function () {
 });
 
 $("#btnRegister").click(function () {
-  $.post("/user/register/" + $("#username").val() + "/" + $("#password").val(), function (data, status) {
+  $.post("/users/register/" + $("#username").val() + "/" + $("#password").val(), function (data, status) {
     $username = $("#username").val();
     if (status == 'success') {
       $("#tokenQr").attr("src", "https://zxing.org/w/chart?cht=qr&chs=250x250&chld=M&choe=UTF-8&chl=otpauth://totp/Precise-IT:" + $username + "?secret=" + data + "&issuer=" + $username);
