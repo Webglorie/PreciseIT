@@ -45,7 +45,7 @@ public class AuthenticationRestController {
             return AuthenticationStatus.FAILED;
         }
 
-        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user.get().getUsername(), user.get().getPassword(), new ArrayList<>());
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user.get().getEmail(), user.get().getPassword(), new ArrayList<>());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         return AuthenticationStatus.AUTHENTICATED;

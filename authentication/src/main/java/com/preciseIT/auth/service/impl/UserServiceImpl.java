@@ -4,10 +4,8 @@ import com.preciseIT.auth.service.UserService;
 import com.preciseIT.entities.User;
 import com.preciseIT.repos.UserRepository;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,9 +36,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUser(String username, String password) {
+    public Optional<User> findUser(String email, String password) {
         return findAll().stream()
-                .filter(user -> user.getUsername().equals(username) && user.getPassword().equals(password))
+                .filter(user -> user.getEmail().equals(email) && user.getPassword().equals(password))
                 .findFirst();
     }
 }

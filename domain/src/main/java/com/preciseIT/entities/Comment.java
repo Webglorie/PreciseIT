@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "comment")
-public class Comment extends AbstractAuditable<Person, UUID> {
+public class Comment extends AbstractAuditable<User, UUID> {
 
     @Column(name = "text")
     private String text;

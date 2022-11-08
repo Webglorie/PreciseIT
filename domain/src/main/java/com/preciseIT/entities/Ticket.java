@@ -4,16 +4,15 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @Table(name = "ticket")
-public class Ticket extends AbstractAuditable<Person, Integer> {
+public class Ticket extends AbstractAuditable<User, Integer> {
 
     public Ticket() {
     }
 
-    public Ticket(String title, Person questioner, Person assignee) {
+    public Ticket(String title, User questioner, User assignee) {
         this.title = title;
         this.questioner = questioner;
         this.assignee = assignee;
@@ -24,11 +23,11 @@ public class Ticket extends AbstractAuditable<Person, Integer> {
 
     @ManyToOne
     @JoinColumn(name = "questioner_id")
-    private Person questioner;
+    private User questioner;
 
     @ManyToOne
     @JoinColumn(name = "assignee_id")
-    private Person assignee;
+    private User assignee;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "ticket_id")
@@ -46,19 +45,19 @@ public class Ticket extends AbstractAuditable<Person, Integer> {
         return title;
     }
 
-    public Person getAssignee() {
+    public User getAssignee() {
         return assignee;
     }
 
-    public void setAssignee(Person assignee) {
+    public void setAssignee(User assignee) {
         this.assignee = assignee;
     }
 
-    public Person getQuestioner() {
+    public User getQuestioner() {
         return questioner;
     }
 
-    public void setQuestioner(Person questioner) {
+    public void setQuestioner(User questioner) {
         this.questioner = questioner;
     }
 }
