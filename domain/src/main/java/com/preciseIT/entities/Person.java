@@ -4,6 +4,8 @@ package com.preciseIT.entities;
 
 
 import com.preciseIT.enums.UserRoles;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
@@ -13,6 +15,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "person")
 public class Person extends AbstractAuditable<Person, Integer> {
@@ -55,44 +59,5 @@ public class Person extends AbstractAuditable<Person, Integer> {
     public Person() {
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String passwordHash) {
-        this.password = passwordHash;
-    }
-
-
-    public List<UserRoles> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(List<UserRoles> userRoles) {
-        this.userRoles = userRoles;
-    }
 }
