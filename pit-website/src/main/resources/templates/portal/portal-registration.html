@@ -25,12 +25,13 @@
 
             <div class="custom-container container">
                 <div class="form-group">
-                    <label for="username">Gebruikersnaam: </label>
-                    <input class="form-control" id="username" placeholder="Voer een gebruikersnaam in" type="text"/>
+                    <label for="email">E-mailadres: </label>
+                    <input class="form-control" id="email" placeholder="Voer een e-mailadres in" type="text"/>
+                    <span class="pit-noemail-input">Het ingevulde e-mailadres is niet geldig, probeer het nog een keer.</span>
                 </div>
                 <div class="form-group">
                     <label for="password">Wachtwoord: </label>
-                    <input class="form-control" id="password" placeholder="Enter password" type="password"/>
+                    <input class="form-control" id="password" placeholder="Voer een wachtwoord in" type="password"/>
                 </div><br>
                 <button class="btn btn-primary" id="btnRegister" type="button">Registreren</button>
                 <button class="btn btn-outline-primary" id="btnCancelRegister" type="button">Annuleren</button>
@@ -70,9 +71,9 @@
         </div>
     </div>
 </div>
-<div th:replace="fragments/general.html :: footer"></div>
+<div th:replace="portal/fragments/general.html :: footer"></div>
 </main>
 
-<div th:replace="fragments/general.html :: footerfiles"></div>
+<div th:replace="portal/fragments/general.html :: footerfiles"></div>
 </body>
 </html>

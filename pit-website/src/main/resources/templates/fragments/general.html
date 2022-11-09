@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 
     <!--    Boostrap core files-->
-    <link href="../../../../../../../PreciseIT/web/src/main/resources/static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
 
     <!--    Fontawesome files-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 
     <!--    Custom CSS and JS-->
-    <link href="../../../../../../../PreciseIT/web/src/main/resources/static/css/custom-css.css" rel="stylesheet" th:href="@{/css/custom-css.css}"/>
+    <link rel="stylesheet" th:href="@{/css/custom-css.css}"/>
 
 
 </head>
@@ -23,7 +23,7 @@
 <div class="container" th:fragment="header-menu">
     <header class="pit-header d-flex flex-wrap justify-content-sm-between py-3 mb-4 border-bottom">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-            <img class="pit-logo" alt="Precise IT Blue with Black Logo" src="../images/preciseit-logo.png">
+            <img class="pit-logo" alt="Precise IT Blue with Black Logo" src="../images/preciseit-logo.png" th:src="@{/images/preciseit-logo.png}">
         </a>
         <i class="fa-solid fa-bars mobile-icon"></i>
 
@@ -57,7 +57,7 @@
 <script crossorigin="anonymous"
         integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
         src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
-<script src="../js/custom-js.js" th:href="@{/js/custom-js.js}"></script>
+<script th:src="@{/js/custom-js.js}"></script>
 </span>
 </body>
 </html>

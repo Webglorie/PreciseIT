@@ -4,6 +4,7 @@ import com.preciseIT.auth.service.UserService;
 import com.preciseIT.entities.User;
 import com.preciseIT.repos.UserRepository;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,9 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
     UserRepository userRepository;
+
+    @Value("${2fa.enabled}")
+    private boolean isTwoFaEnabled;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -23,8 +27,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User register(String username, String password) {
-        User user = new User(username, password, generateSecret());
+    public User register(String email, String password) {
+        User user = new User(email, password, generateSecret());
         userRepository.save(user);
 
         return user;

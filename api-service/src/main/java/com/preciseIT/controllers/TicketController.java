@@ -1,23 +1,26 @@
 package com.preciseIT.controllers;
 
 import com.preciseIT.entities.Ticket;
+import com.preciseIT.entities.User;
 import com.preciseIT.repos.TicketRepository;
+import com.preciseIT.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/tickets")
 public class TicketController {
     //todo implementation
     private final TicketRepository ticketRepository;
+    private final UserRepository userRepository;
 
-    public TicketController(@Autowired TicketRepository ticketRepository) {
+    public TicketController(@Autowired TicketRepository ticketRepository, UserRepository userRepository) {
         this.ticketRepository = ticketRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
@@ -41,9 +44,16 @@ public class TicketController {
         return ticketRepository.save(ticket);
     }
 
+    @PostMapping("/create-ticket/{title}/{createdById}")
+    public boolean register(@PathVariable String title, @PathVariable String createdById) {
+        User user = new User("Testuser", "test", "test");
+        userRepository.save(user);
+        Ticket ticket = new Ticket();
+        ticket.setTitle(title);
+        ticket.setAssignee(user);
+        ticketRepository.save(ticket);
 
-
-
-
+        return true;
+    }
 
 }

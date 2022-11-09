@@ -188,6 +188,25 @@ footer p {
 label.form-label {
     font-weight: 500;
 }
+span.pit-noemail-input {
+    color: red;
+    margin-bottom: 11px!important;
+    display: none;
+}
+
+/*Admin panel css*/
+header.user-header {
+    position: relative;
+    margin-top: 10px;
+}
+.user-header .pit-loggedin-header {
+    display: flex;
+    position: absolute;
+    right: 15px;
+    top: 0px;
+    font-size: 15px;
+}
+
 
 /* Media querys for all devices */
 

@@ -40,17 +40,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/portal/registration",
                         "/images/*",
                         "/css/*",
+                        "/portal/admin/dashboard",
+                        "/portal/admin",
                         "/contact",
                         "/js/*",
                         "/images*",
                         "/user/register/**/",
+                        "/portal/users",
+                        "/portal/logout-succes",
+                        "/portal/create-ticket",
+                        "/portal/create-ticket/**",
+                        "/tickets/create-ticket",
+                        "/tickets/create-ticket/**",
                         "/authenticate/**/")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/portal/login")
-                .defaultSuccessUrl("/portal")
+                .defaultSuccessUrl("/portal/dashboard")
                 .permitAll()
                 .and()
                 .logout()

@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name="`user`")
+@Table(name="users")
 public class User extends AbstractAuditable<User, Integer> {
 
 

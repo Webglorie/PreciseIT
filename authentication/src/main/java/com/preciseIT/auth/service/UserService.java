@@ -9,8 +9,8 @@ import java.util.Optional;
 public interface UserService {
 
     Iterable<User> findAll();
-    User register(String username, String password);
-    Optional<User> findUser(String username, String password);
+    User register(String email, String password);
+    Optional<User> findUser(String email, String password);
     String generateSecret();
 
 }

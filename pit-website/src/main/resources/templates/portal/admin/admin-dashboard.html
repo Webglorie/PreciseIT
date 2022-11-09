@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingelogd - Precise IT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Precise IT Website"/>
+    <meta name="author" content="Bart Reijnders, Arjen Froma"/>
+
+    <div th:replace="/portal/fragments/general.html :: headerfiles"></div>
+
+
+</head>
+<body>
+<div th:replace="/portal/fragments/general.html :: header-menu"></div>
+<div class="px-4 py-5 my-5 pit-page-title">
+    <div class="container">
+        <h1 class="float-start">Welkom ingelogde gebruiker!</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row pit-home-starttext">
+        <div class="col-md-6">
+            <p>Admin Portal. <div th:text="${username}"></div></p>
+
+            <p>
+                <a class="btn btn-outline-info" id="btnLogout">Logout</a>
+            </p>
+
+        </div>
+        <div class="col-md-6">
+            <img src="../../images/contact-image.png">
+
+        </div>
+    </div>
+</div>
+<div th:replace="/portal/fragments/general.html :: footer"></div>
+</main>
+
+<div th:replace="/portal/fragments/general.html :: footerfiles"></div>
+</body>
+</html>
