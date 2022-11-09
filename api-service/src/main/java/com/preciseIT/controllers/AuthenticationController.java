@@ -5,6 +5,7 @@ import com.preciseIT.auth.service.UserService;
 import com.preciseIT.entities.User;
 import com.preciseIT.enums.AuthenticationStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -22,20 +23,32 @@ public class AuthenticationController {
     @Autowired
     private TotpService totpService;
 
-    @PostMapping("{username}/{password}")
-    public AuthenticationStatus authenticate(@PathVariable String username, @PathVariable String password) {
-        Optional<User> user = userService.findUser(username, password);
+    @Value("${2fa.enabled}")
+    private boolean isTwoFaEnabled;
+
+    @PostMapping("{email}/{password}")
+    public AuthenticationStatus authenticate(@PathVariable String email, @PathVariable String password) {
+        Optional<User> user = userService.findUser(email, password);
 
         if (!user.isPresent()) {
             return AuthenticationStatus.FAILED;
         }
-            SecurityContextHolder.getContext().setAuthentication(null);
-            return AuthenticationStatus.REQUIRE_TOKEN_CHECK;
+
+//       TODO: tried to disable 2fa for testing purposes but didnt work, something for later
+        if (!isTwoFaEnabled) {
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, password);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            return AuthenticationStatus.AUTHENTICATED;
+        } else {
+        SecurityContextHolder.getContext().setAuthentication(null);
+        return AuthenticationStatus.REQUIRE_TOKEN_CHECK;
+        }
+
     }
 
-    @GetMapping("token/{username}/{password}/{token}")
-    public AuthenticationStatus tokenCheck(@PathVariable String username, @PathVariable String password, @PathVariable String token) {
-        Optional<User> user = userService.findUser(username, password);
+    @GetMapping("token/{email}/{password}/{token}")
+    public AuthenticationStatus tokenCheck(@PathVariable String email, @PathVariable String password, @PathVariable String token) {
+        Optional<User> user = userService.findUser(email, password);
 
         if (!user.isPresent()) {
             return AuthenticationStatus.FAILED;
