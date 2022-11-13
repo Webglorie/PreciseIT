@@ -1,17 +1,21 @@
 package com.preciseIT.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "ticket")
 public class Ticket extends AbstractAuditable<User, Integer> {
-
-    public Ticket() {
-    }
-
     public Ticket(String title, User questioner, User assignee) {
         this.title = title;
         this.questioner = questioner;
@@ -37,27 +41,5 @@ public class Ticket extends AbstractAuditable<User, Integer> {
     @JoinColumn(name = "product_id")
     private Product subjectProduct;
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public User getAssignee() {
-        return assignee;
-    }
-
-    public void setAssignee(User assignee) {
-        this.assignee = assignee;
-    }
-
-    public User getQuestioner() {
-        return questioner;
-    }
-
-    public void setQuestioner(User questioner) {
-        this.questioner = questioner;
-    }
 }
