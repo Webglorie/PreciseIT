@@ -3,8 +3,15 @@ package com.preciseIT.webapp.controller;
 
 import com.preciseIT.auth.service.UserService;
 import com.preciseIT.entities.User;
+import com.preciseIT.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +29,9 @@ public class MainPageController {
     private UserService userService;
 
     private final String appMode;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
 
     @Autowired
     public MainPageController(Environment environment){
@@ -48,7 +58,6 @@ public class MainPageController {
     public String showPortaal(HttpServletRequest request, Model model) {
         model.addAttribute("username", request.getUserPrincipal().getName());
         model.addAttribute("password", request.getUserPrincipal().toString());
-        Principal principal = request.getUserPrincipal();
 
         return "portal/portal-dashboard";
     }
@@ -71,8 +80,8 @@ public class MainPageController {
 
     @GetMapping("/portal/users")
     public String listRegisteredUsers(Model model){
-        List<User> appUsers = (List<User>) userService.findAll();
-        model.addAttribute("users", appUsers);
+        List<User> users = (List<User>) userService.findAll();
+        model.addAttribute("users", users);
         return "portal/portal-users";
     }
 
@@ -80,11 +89,6 @@ public class MainPageController {
     @ResponseBody
     public String currentUserName(Principal principal) {
         return principal.getName();
-    }
-
-    @RequestMapping("/portal/admin/dashboard")
-    public String showAdminDashboard(){
-        return "portal/admin/admin-dashboard";
     }
 
     @RequestMapping("/portal/create-ticket")

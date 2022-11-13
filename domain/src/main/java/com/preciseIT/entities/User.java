@@ -1,6 +1,6 @@
 package com.preciseIT.entities;
 
-import com.preciseIT.enums.UserRoles;
+import com.preciseIT.enums.Role;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,7 +8,6 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
@@ -29,43 +28,46 @@ public class User extends AbstractAuditable<User, Integer> {
     @Column(name = "secret")
     private String secret;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "userRole", joinColumns = @JoinColumn(name = "id"))
+    @Column(name = "role")
     @Enumerated(value = EnumType.STRING)
-    private List<UserRoles> userRoles = List.of(UserRoles.CLIENT);
+    private Role role;
 
-    public User(String email, String firstName, String lastName, String password, List<UserRoles> userRoles, String secret) {
+    public User(String email, String firstName, String lastName, String password, Role role, String secret) {
         this.setCreatedDate(LocalDateTime.now());
         this.setLastModifiedDate(LocalDateTime.now());
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.userRoles = userRoles;
+        this.role = role;
         this.secret = secret;
     }
 
-    public User(String email, String firstName, String lastName, String password) {
+    public User(String email, String password, String secret, Role role) {
+        this.email = email;
+        this.password = password;
+        this.secret = secret;
+        this.role = role;
+    }
+
+    public User(String email, String firstName, String lastName, String password, Role role) {
         this.setCreatedDate(LocalDateTime.now());
         this.setLastModifiedDate(LocalDateTime.now());
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.userRoles = List.of(UserRoles.CLIENT);
+        this.role = role;
     }
 
-    public User(String email, String password, String secret) {
-        this.email = email;
-        this.password = password;
-        this.secret = secret;
-    }
-
-    public User(String email, String firstName, String lastName, String password, String secret) {
+    public User(String email, String firstName, String lastName, String password, String secret, Role role) {
+        this.setCreatedDate(LocalDateTime.now());
+        this.setLastModifiedDate(LocalDateTime.now());
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
         this.secret = secret;
+        this.role = role;
     }
 }
