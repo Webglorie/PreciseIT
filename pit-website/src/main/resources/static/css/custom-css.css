@@ -229,6 +229,9 @@ span.question-title, .pit-ticket-form-title {
     border-radius: 5px;
     margin-bottom: 20px;
 }
+.pit-loggedin-user span.showusername{
+    margin-right: 10px;
+}
 span.pit-header-title {
     background-color: #0072d6;
     color: #fff;

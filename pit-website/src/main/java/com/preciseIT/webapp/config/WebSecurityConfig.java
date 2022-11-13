@@ -1,14 +1,22 @@
 package com.preciseIT.webapp.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 @Configuration
 @EnableWebSecurity
+@EnableTransactionManagement
+@EnableJpaRepositories
+@EnableJpaAuditing
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) {
@@ -36,12 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/h2-console**",
                         "/h2-console",
                         "/h2-console/**",
-                        "/portal/login",
                         "/portal/registration",
                         "/images/*",
                         "/css/*",
-                        "/portal/admin/dashboard",
-                        "/portal/admin",
                         "/contact",
                         "/js/*",
                         "/images*",
@@ -49,11 +54,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/portal/users",
                         "/portal/logout-succes",
                         "/portal/create-ticket",
+                        "/portal/tickets",
                         "/portal/create-ticket/**",
                         "/tickets/create-ticket",
                         "/tickets/create-ticket/**",
-                        "/authenticate/**/")
+                        "/authenticate/**/",
+                        "/authenticate/**/**",
+                        "/authenticate/*/*")
                 .permitAll()
+                .antMatchers(
+                        "/portal/admin/**",
+                        "/portal/tickets/create-ticket/**",
+                        "/portal/tickets/create-ticket/**/**",
+                        "/portal/tickets/**")
+                .hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -64,4 +78,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll();
     }
+
+    @Bean
+    @Override public AuthenticationManager authenticationManagerBean() throws Exception { return super.authenticationManagerBean(); }
+
 }

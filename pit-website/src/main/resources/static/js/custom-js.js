@@ -73,13 +73,12 @@ $("#btnRegister").click(function () {
 });
 
 $("#btnCreateTicket").click(function () {
-    $.post("/tickets/create-ticket/" + $("#probleemBeschrijving").val() + "/" + $("#uwId").val(), function (data, status) {
+    $.post("/portal/tickets/create-ticket/" + $("#probleemBeschrijving").val() + "/" + $("#uwId").val(), function (data, status) {
       if (status == 'success') {
-        console.log("success");
+        window.location.replace("/portal/tickets/all");
       }
-      console.log("status fail: " + status)
+      window.location.replace("/portal/create-ticket?=" + status);
     });
-  console.log("status fail: ")
 });
 
 $("#btnTokenVerify").click(function () {
