@@ -5,8 +5,6 @@ import com.preciseIT.auth.service.UserService;
 import com.preciseIT.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.List;
 
@@ -40,8 +39,17 @@ public class MainPageController {
         return "contact";
     }
 
+    @RequestMapping("/")
+    public String getHomePage() {
+        return "index";
+    }
+
     @RequestMapping("/portal/dashboard")
-    public String showPortaal() {
+    public String showPortaal(HttpServletRequest request, Model model) {
+        model.addAttribute("username", request.getUserPrincipal().getName());
+        model.addAttribute("password", request.getUserPrincipal().toString());
+        Principal principal = request.getUserPrincipal();
+
         return "portal/portal-dashboard";
     }
 
@@ -63,8 +71,8 @@ public class MainPageController {
 
     @GetMapping("/portal/users")
     public String listRegisteredUsers(Model model){
-        List<User> users = (List<User>) userService.findAll();
-        model.addAttribute("users", users);
+        List<User> appUsers = (List<User>) userService.findAll();
+        model.addAttribute("users", appUsers);
         return "portal/portal-users";
     }
 

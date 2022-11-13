@@ -12,6 +12,25 @@ $("#btnCancelLogin").click(function () {
   window.location.replace("/");
 });
 
+$("#ServiceMeldingButton").click(function () {
+  $('#service-form').show();
+  $('#priority-form').hide();
+  $('#incident-form').hide();
+});
+
+$("#IncidentMeldingButton").click(function () {
+  $('#incident-form').show();
+  $('#priority-form').hide();
+  $('#service-form').hide();
+
+});
+
+$("#SpoedMeldingButton").click(function () {
+  $('#priority-form').show();
+  $('#incident-form').hide();
+  $('#service-form').hide();
+});
+
 $("#btnRegisterDone").click(function () {
   window.location.replace("/portal/login");
 });

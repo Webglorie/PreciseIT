@@ -1,8 +1,5 @@
 package com.preciseIT.entities;
 
-
-
-
 import com.preciseIT.enums.UserRoles;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -60,6 +57,14 @@ public class User extends AbstractAuditable<User, Integer> {
 
     public User(String email, String password, String secret) {
         this.email = email;
+        this.password = password;
+        this.secret = secret;
+    }
+
+    public User(String email, String firstName, String lastName, String password, String secret) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.password = password;
         this.secret = secret;
     }

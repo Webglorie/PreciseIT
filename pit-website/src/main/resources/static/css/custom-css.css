@@ -207,7 +207,76 @@ header.user-header {
     font-size: 15px;
 }
 
+/*Ticket form css*/
+span.question-title, .pit-ticket-form-title {
+    display: block;
+    font-weight: 600;
+    margin: 20px 0px;
+    font-size: 20px;
+}
+.pit-ticket-form-question-1 button {
+    width: 32%;
+}
+.pit-ticket-form label.form-label {
+    font-weight: 600;
+}
+#service-form,#incident-form,#priority-form{
+    display: none;
+}
+/*Dashboard CSS*/
+.pit-side-menu {
+    border: 2px solid #eeeeee;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+span.pit-header-title {
+    background-color: #0072d6;
+    color: #fff;
+    padding: 10px 15px;
+    margin-bottom: -5px;
+    font-size: 20px;
+    width: 100%!important;
+    display: block;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.pit-title-box-container {
+    padding: 10px;
+}
+table#notificationTable td {
+    padding: 5px;
+    font-size: 15px;
+}
+.table-secondary{
+    background-color: #f6f6f6;
+}
+.pit-title-box {
+    border: 2px solid #eeeeee;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.pit-title-box-container {
+    padding: 15px;
+}
+.pit-side-menu span.side-header-title {
+    background-color: #0072d6;
+    color: #fff;
+    padding: 10px 15px;
+    margin-bottom: -5px;
+    font-size: 20px;
+    width: 100%!important;
+    display: block;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.pit-side-menu-container{
+    padding: 15px;
+}
+.pit-side-menu-item a.btn {
+    width: 100%;
+    margin: 8px 0px;
 
+}
 /* Media querys for all devices */
 
 @media only screen and (max-width: 1999px) {
