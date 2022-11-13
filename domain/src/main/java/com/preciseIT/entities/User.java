@@ -70,4 +70,5 @@ public class User extends AbstractAuditable<User, Integer> {
         this.secret = secret;
         this.role = role;
     }
+
 }
