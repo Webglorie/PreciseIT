@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerfiles">
+    <meta charset="UTF-8">
+
+    <!--    Boostrap core files-->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+
+    <!--    Fontawesome files-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!--    Google font files-->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+
+    <!--    Custom CSS and JS-->
+    <link rel="stylesheet" th:href="@{/css/custom-css.css}"/>
+
+
+</head>
+<body>
+<div class="container" th:fragment="header-menu">
+    <header class="pit-header user-header d-flex flex-wrap justify-content-sm-between py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img class="pit-logo" alt="Precise IT Blue with Black Logo" th:src="@{/images/preciseit-logo.png}">
+        </a>
+        <div class="pit-loggedin-header">
+            <div class="pit-loggedin-user">
+                <span>Ingelogd als <span class="showusername" th:text="${username}"></span></span>
+            </div>
+            <div class="pit-logout-header">
+                <a href="#" id="btnLogoutHeader">Uitloggen</a>
+            </div>
+        </div>
+        <i class="fa-solid fa-bars mobile-icon"></i>
+
+        <ul class="nav nav-pills mobile-nav">
+            <li class="nav-item nav-item-border"><a href="#" class="nav-link">Openstaande Meldingen (287)</a></li>
+            <li class="nav-item nav-item-border"><a href="#" class="nav-link">Alle Meldingen</a></li>
+            <li class="nav-item nav-item-border"><a href="#" class="nav-link">Beheer Paneel</a></li>
+        </ul>
+    </header>
+</div>
+
+<footer th:fragment="footer">
+    <div class="container">
+        <p class="float-end"><a href="#">Privacy</a> &middot; <a href="#">Terms</a> &middot;  <a href="#">Back to top</a></p>
+        <p>&copy; 2022 Precise IT &middot; All Right Reserverd </p>
+    </div>
+</footer>
+<span th:fragment="footerfiles">
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script
+        src="https://code.jquery.com/jquery-3.2.1.js"
+        integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+        crossorigin="anonymous"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script crossorigin="anonymous"
+        integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"></script>
+<script th:src="@{/js/custom-js.js}"></script>
+</span>
+</body>
+</html>
