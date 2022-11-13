@@ -2,7 +2,6 @@ package com.preciseIT.controllers;
 
 import com.preciseIT.auth.service.TicketService;
 import com.preciseIT.auth.service.UserService;
-import com.preciseIT.entities.Auditable;
 import com.preciseIT.entities.User;
 import com.preciseIT.entities.Ticket;
 import org.springframework.http.HttpStatus;
@@ -56,8 +55,7 @@ public class TicketController {
     @PostMapping("/create-ticket/{title}/{createdById}")
     public String register(HttpServletRequest request, @PathVariable String title, @PathVariable String createdById) {
         User user1 = userService.findByEmail(request.getUserPrincipal().getName());
-        userService.saveUser(user1);
-        Ticket ticket = new Ticket(title, new Auditable<>());
+        Ticket ticket = new Ticket(title, user1);
         ticketService.saveTicket(ticket);
         return "portal/portal-tickets";
     }

@@ -20,11 +20,11 @@ public class DummyData {
         UserRepository.save(appUser3);
         User appUser4 = new User("Testadmin@gmail.com", "Arjen", "Froma", "password", "TTEO2UXZ7X", Role.ADMIN);
         UserRepository.save(appUser4);
-        Ticket ticket1 = new Ticket("hulp nodig bij starten laptop", appUser2, appUser1);
+        Ticket ticket1 = new Ticket("hulp nodig bij starten laptop", appUser2, appUser1, appUser1);
         ticketRepository.save(ticket1);
-        Ticket ticket2 = new Ticket("Word crasht na invoeren hoofdletter", appUser3, appUser1);
+        Ticket ticket2 = new Ticket("Word crasht na invoeren hoofdletter", appUser3, appUser1, appUser2);
         ticketRepository.save(ticket2);
-        Ticket ticket3 = new Ticket("Geen wifi meer", appUser3, appUser1);
+        Ticket ticket3 = new Ticket("Geen wifi meer", appUser3, appUser1,appUser4);
         ticketRepository.save(ticket3);
 
 

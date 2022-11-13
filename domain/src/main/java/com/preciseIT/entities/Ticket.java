@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
@@ -17,20 +18,19 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "ticket")
 public class Ticket extends AbstractAuditable<User, Integer> {
-    public Ticket(String title, User questioner, User assignee) {
+    public Ticket(String title, User questioner, User assignee, User createdBy) {
+        this.setCreatedBy(createdBy);
         this.setCreatedDate(LocalDateTime.now());
-        this.setLastModifiedDate(LocalDateTime.now());
-        this.setCreatedBy(questioner);
         this.title = title;
         this.questioner = questioner;
         this.assignee = assignee;
     }
 
-    public Ticket(String title, Auditable<User> userAuditable) {
+    public Ticket(String title, User createdBy) {
         this.title = title;
-        this.setCreatedBy(userAuditable.getCreatedBy());
+        this.setCreatedBy(createdBy);
+        this.setQuestioner(createdBy);
         this.setCreatedDate(LocalDateTime.now());
-        this.setLastModifiedDate(LocalDateTime.now());
     }
 
     @Column(name = "title", nullable = false)
