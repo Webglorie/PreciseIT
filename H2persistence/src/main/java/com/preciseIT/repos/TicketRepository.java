@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Repository
 public interface TicketRepository extends CrudRepository<Ticket, Integer> {
-   Iterable<Ticket> findByAssignee(UUID Assignee);
-   Iterable<Ticket> findByQuestioner (UUID Questioner);
+   Iterable<Ticket> findByAssignee(Integer Assignee);
+   Iterable<Ticket> findByQuestioner (Integer Questioner);
 
 }

@@ -17,8 +17,6 @@ public class AdminPageController {
 
     @RequestMapping("/dashboard")
     public String showAdminDashboard(HttpSession session, Model model){
-
-
         return "portal/admin/admin-dashboard";
     }
 

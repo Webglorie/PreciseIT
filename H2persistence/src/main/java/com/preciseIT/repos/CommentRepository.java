@@ -1,7 +1,12 @@
 package com.preciseIT.repos;
 
+import com.preciseIT.entities.Comment;
 import com.preciseIT.entities.Ticket;
 import org.springframework.data.repository.CrudRepository;
 
-public interface CommentRepository extends CrudRepository<Ticket, Integer> {
+import java.util.List;
+
+public interface CommentRepository extends CrudRepository<Comment, Integer> {
+
+    //List<Comment> findByTicket(Integer id);
 }

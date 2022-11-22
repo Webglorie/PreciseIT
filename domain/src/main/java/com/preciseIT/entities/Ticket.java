@@ -41,15 +41,15 @@ public class Ticket extends AbstractAuditable<User, Integer> {
     private User questioner;
 
     @ManyToOne
-    @JoinColumn(name = "assignee_id")
+    @JoinColumn(name = "assignee")
     private User assignee;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "ticket_id")
+    @JoinColumn(name = "ticket")
     private List<Comment> comments;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "product")
     private Product subjectProduct;
 
 

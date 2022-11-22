@@ -19,7 +19,9 @@ public class DummyData {
         User appUser3 = new User("282859@thedoc.nl", "Bart", "Rijnders", "password", Role.COMPANYADMIN);
         UserRepository.save(appUser3);
         User appUser4 = new User("Testadmin@gmail.com", "Arjen", "Froma", "password", "TTEO2UXZ7X", Role.ADMIN);
+        User appUser5 = new User("bartrijnders94@gmail.com", "Bart", "Rijnders", "password", "CM1VHSO9KB", Role.ADMIN);
         UserRepository.save(appUser4);
+        UserRepository.save(appUser5);
         Ticket ticket1 = new Ticket("hulp nodig bij starten laptop", appUser2, appUser1, appUser1);
         ticketRepository.save(ticket1);
         Ticket ticket2 = new Ticket("Word crasht na invoeren hoofdletter", appUser3, appUser1, appUser2);

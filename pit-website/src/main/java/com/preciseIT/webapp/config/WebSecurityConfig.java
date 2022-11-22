@@ -66,6 +66,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/portal/admin/**",
                         "/portal/tickets/create-ticket/**",
                         "/portal/tickets/create-ticket/**/**",
+                        "portal/portal-createTicketByHelpdesk/**",
+                        "/portal/create-ticketByHelpDesk/**",
                         "/portal/tickets/**")
                 .hasAuthority("ROLE_ADMIN")
                 .anyRequest().authenticated()

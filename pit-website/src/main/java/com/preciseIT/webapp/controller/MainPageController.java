@@ -96,5 +96,12 @@ public class MainPageController {
         return "portal/portal-createticket";
     }
 
+    @RequestMapping("/portal/create-ticketByHelpDesk")
+    public String showCreateTicketByHelpdesk() {
+        System.out.println("hello world");
+        return "portal/portal-createTicketByHelpdesk";
+    }
+
+
 }
 
