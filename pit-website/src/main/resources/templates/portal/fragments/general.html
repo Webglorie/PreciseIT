@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="headerfiles">
     <meta charset="UTF-8">
 
@@ -38,7 +38,9 @@
         <ul class="nav nav-pills mobile-nav">
             <li class="nav-item nav-item-border"><a href="#" class="nav-link">Openstaande Meldingen (287)</a></li>
             <li class="nav-item nav-item-border"><a href="#" class="nav-link">Alle Meldingen</a></li>
+            <div sec:authorize="hasAuthority('ROLE_ADMIN')" >
             <li class="nav-item nav-item-border"><a href="#" class="nav-link">Beheer Paneel</a></li>
+            </div>
         </ul>
     </header>
 </div>
