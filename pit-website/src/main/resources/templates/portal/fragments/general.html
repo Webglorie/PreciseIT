@@ -27,7 +27,7 @@
         </a>
         <div class="pit-loggedin-header">
             <div class="pit-loggedin-user">
-                <span>Ingelogd als <span class="showusername" th:text="${username}"></span></span>
+                <span>Ingelogd als <span sec:authentication="name"></span> |</span>
             </div>
             <div class="pit-logout-header">
                 <a href="#" id="btnLogoutHeader">Uitloggen</a>
@@ -39,7 +39,7 @@
             <li class="nav-item nav-item-border"><a href="#" class="nav-link">Openstaande Meldingen (287)</a></li>
             <li class="nav-item nav-item-border"><a href="#" class="nav-link">Alle Meldingen</a></li>
             <div sec:authorize="hasAuthority('ROLE_ADMIN')" >
-            <li class="nav-item nav-item-border"><a href="#" class="nav-link">Beheer Paneel</a></li>
+            <li class="nav-item nav-item-border"><a href="/portal/admin/dashboard" class="nav-link">Beheer Paneel</a></li>
             </div>
         </ul>
     </header>

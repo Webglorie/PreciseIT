@@ -71,4 +71,8 @@ public class User extends AbstractAuditable<User, Integer> {
         this.role = role;
     }
 
+    public String getFullName(){
+        return getFirstName() + " " + getLastName();
+    }
+
 }

@@ -26,6 +26,16 @@ public class Ticket extends AbstractAuditable<User, Integer> {
         this.assignee = assignee;
     }
 
+    public Ticket(String title, User questioner, User assignee, User createdBy, Status status, Priority priority) {
+        this.title = title;
+        this.questioner = questioner;
+        this.assignee = assignee;
+        this.status = status;
+        this.priority = priority;
+        this.setCreatedBy(createdBy);
+        this.setCreatedDate(LocalDateTime.now());
+    }
+
     public Ticket(String title, User createdBy) {
         this.title = title;
         this.setCreatedBy(createdBy);
@@ -37,7 +47,7 @@ public class Ticket extends AbstractAuditable<User, Integer> {
     private String title;
 
     @ManyToOne
-    @JoinColumn(name = "questioner_id")
+    @JoinColumn(name = "questioner")
     private User questioner;
 
     @ManyToOne
@@ -51,6 +61,11 @@ public class Ticket extends AbstractAuditable<User, Integer> {
     @ManyToOne
     @JoinColumn(name = "product")
     private Product subjectProduct;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    Status status;
+    @ManyToOne(fetch = FetchType.LAZY)
+    Priority priority;
 
 
 }
