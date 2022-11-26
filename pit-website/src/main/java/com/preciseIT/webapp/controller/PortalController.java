@@ -1,8 +1,10 @@
 package com.preciseIT.webapp.controller;
 
+import com.preciseIT.auth.service.CommentService;
 import com.preciseIT.auth.service.StatusService;
 import com.preciseIT.auth.service.TicketService;
 import com.preciseIT.auth.service.UserService;
+import com.preciseIT.entities.Comment;
 import com.preciseIT.entities.Status;
 import com.preciseIT.entities.Ticket;
 import com.preciseIT.entities.User;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -29,6 +32,9 @@ public class PortalController {
     @Autowired
     StatusService statusService;
 
+    @Autowired
+    CommentService commentService;
+
 //    @RequestMapping("/portal")
 //    String index() {
 //        return "portal/portal-dashboard";
@@ -40,7 +46,7 @@ public class PortalController {
         model.addAttribute("password", request.getUserPrincipal().toString());
 
         User user = userService.findByEmail(request.getUserPrincipal().getName());
-        model.addAttribute("fullName", user.getFullName());
+        model.addAttribute("user", user);
 
         return "portal/portal-dashboard";
     }
@@ -87,7 +93,10 @@ public class PortalController {
     @RequestMapping(value = "/ticket/{tickId}", method = RequestMethod.GET)
     public String ticket(Model model, String ticketId, @PathVariable String tickId) {
         Ticket ticket = ticketService.getTicketById(tickId);
+        List<Comment> listComments = commentService.findCommentByTicket(ticket);
+        Collections.reverse(listComments);
         model.addAttribute("ticket", ticket);
+        model.addAttribute("listComments", listComments);
 
         return "portal/portal-ticket";
     }

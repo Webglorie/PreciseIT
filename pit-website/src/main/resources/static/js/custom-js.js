@@ -81,6 +81,15 @@ $("#btnCreateTicket").click(function () {
     });
 });
 
+$("#btnPlaceComment").click(function () {
+  $.post("/portal/ticket/" + $("#ticketid").val() + "/addcomment/" + $("#comment").val(), function (data, status) {
+    if (status == 'success') {
+      window.location.replace("/portal/ticket/" + $("#ticketid").val() + "?status=successssss");
+    }
+    window.location.replace("/portal/ticket/" + $("#ticketid").val() + "?status=faileedddddd");
+  });
+});
+
 $("#btnTokenVerify").click(function () {
   $('#msgTokenCheckFailed').hide();
   $.post("/authenticate/token/" + $("#email").val() + "/" + $("#password").val() + "/" + $("#loginToken").val(), function (data, status) {

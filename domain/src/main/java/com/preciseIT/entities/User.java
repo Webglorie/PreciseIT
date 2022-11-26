@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -31,6 +32,9 @@ public class User extends AbstractAuditable<User, Integer> {
     @Column(name = "role")
     @Enumerated(value = EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private Collection<Ticket> tickets;
 
     public User(String email, String firstName, String lastName, String password, Role role, String secret) {
         this.setCreatedDate(LocalDateTime.now());

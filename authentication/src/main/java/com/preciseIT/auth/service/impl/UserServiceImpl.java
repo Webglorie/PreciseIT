@@ -72,6 +72,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findById(String id) {
+        return userRepository.findById(Integer.parseInt(id));
+    }
+
+    @Override
     public Optional<User> findUser(String email, String password) {
         return findAll().stream()
                 .filter(user -> user.getEmail().equals(email) && user.getPassword().equals(password))

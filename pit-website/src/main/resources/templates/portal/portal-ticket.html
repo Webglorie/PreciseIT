@@ -21,100 +21,161 @@
 </div>
 <div class="container">
     <div class="row pit-home-starttext">
-        <div class="col-lg-8 pb-5">
+        <div class="col-8">
             <div class="pit-title-box">
-                <span class="pit-header-title">Alle tickets</span>
+                <span class="pit-header-title">Ticket #<span th:text="${ticket.id}"></span> - <span th:text="${ticket.title}"></span></span>
                 <div class="pit-title-box-container">
                     <div class="pit-ticket-form">
                         <div class="pit-ticket-form-container">
                             <div class="pit-ticket-form-intro">
-                                <p>Via het onderstaande formulier kunt u op een eenvoudige manier een nieuwe melding maken. Indien het gaat om een Prio 1 spoed melding gebruik dan de "Spoed melding" knop.</p>
+                                <p>
+                                    <span th:text="${ticket.ticketContent}"></span>
+                                </p>
 
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="pit-ticket-form">
-                <div class="pit-ticket-form-container">
-                    <div class="pit-ticket-form-intro">
-
-                        <table id="pit-tickets-table"
-                               class="table table-striped table-bordered">
-                            <thead>
-                            <tr>
-                                <th>Ticket ID</th>
-                                <th>Titel</th>
-
-                                <th>Gemaakt door</th>
-                                <th>Gekoppeld aan</th>
-                                <th>Prioriteit</th>
-                                <th>Status</th>
-                                <th>Acties</th>
-
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            <tr th:object="${ticket}">
-                                <td th:text="${ticket.id}"></td>
-                                <td th:text="${ticket.title}"></td>
-
-                                <td th:text="${ticket.assignee.email}"></td>
-                                <td th:text="${ticket.questioner.email}"></td>
-                                <td th:text="${ticket.priority.name}"></td>
-                                <td th:text="${ticket.status.name}"></td>
-                                <td>
-                                    <!-- <a class="nav-link"
-                                                            type="button"  th:href="@{/ticket/{${ticket.id}}">Update</a> -->
-                                    <a th:href="@{/ticket/{id}(id=${id})}">Update</a>
 
 
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                <div class="pit-comment-section row d-flex justify-content-center mb-4">
+
+                    <div class="col-md-12">
+
+                        <div class="headings d-flex justify-content-between align-items-center mb-3">
+                            <h5>Ticket Conversatie</h5>
+
+                        </div>
+
+
+                        <div class="pit-comment-col card mt-2" th:each="i : ${#numbers.sequence(ticket.comments.size() - 1, 0, -1)}"
+                             th:with="comment=${ticket.comments[i]}">
+
+                            <div class="d-flex justify-content-between align-items-center" >
+
+                                <div class="user d-flex flex-row align-items-center">
+
+                                    <span><h4>#<span th:text="${[i] + 1}">Body</span> - Reactie van: <span th:text="${comment.user.fullName}">Body</span></h4>
+                                        <small class="font-weight-bold"><span th:text="${comment.text}">Body</span> </small>
+                                    </span>
+
+
+                                </div>
+
+
+                                <small> <span th:text="${#temporals.format(comment.createdAt,'dd-MM-yyyy HH:mm')}"></span></small>
+
+                            </div>
+
+
+                            <div class="action d-flex justify-content-between mt-2 align-items-center">
+
+                                <div class="reply">
+                                    <small>Remove</small>
+                                    <span class="dots"></span>
+                                    <small>Reply</small>
+                                    <span class="dots"></span>
+                                    <small>Translate</small>
+
+                                </div>
+
+                                <div class="icons align-items-center">
+                                    <i class="fa fa-check-circle-o check-icon text-primary"></i>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+                </div>
+
+            </div>
+            <div class="pit-title-box">
+                <span class="pit-header-title">Plaats een nieuwe reactie</span>
+                <div class="pit-title-box-container">
+                    <div class="pit-ticket-form">
+                        <div class="pit-ticket-form-container">
+                            <div class="pit-ticket-form-intro">
+                                    <p>
+                                        Wat wilt u reageren?
+                                    </p>
+                                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                                        <div class="form-floating mb-3">
+                                            <textarea class="form-control" id="comment" type="text" placeholder="Comment" style="height: 10rem;" data-sb-validations="required"></textarea>
+                                            <label for="comment">Reageer...</label>
+                                            <div class="invalid-feedback" data-sb-feedback="comment:required">Comment is required.</div>
+                                        </div>
+                                        <input type="hidden" id="ticketid" th:field="${ticket.id}"/>
+                                        <div class="d-none" id="submitSuccessMessage">
+                                            <div class="text-center mb-3">
+                                                <div class="fw-bolder">Form submission successful!</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-none" id="submitErrorMessage">
+                                            <div class="text-center text-danger mb-3">Error sending message!</div>
+                                        </div>
+                                        <div class="d-grid">
+                                            <button class="btn btn-primary btn-lg" id="btnPlaceComment" type="submit">Reageer</button>
+                                        </div>
+                                    </form>
+                                <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
-        <div class="col-lg-4 pb-5">
-            <!-- Account Sidebar-->
-            <div class="author-card pb-3">
-                <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"><a class="btn btn-style-1 btn-white btn-sm" href="#" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward points to spend"><i class="fa fa-award text-md"></i>&nbsp;290 points</a></div>
-                <div class="author-card-profile">
-                    <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams">
-                    </div>
-                    <div class="author-card-details">
-                        <h5 class="author-card-name text-lg">Daniel Adams</h5><span class="author-card-position">Joined February 06, 2017</span>
-                    </div>
+        <div class="col-4">
+            <div class="pit-side-menu">
+                <span class="side-header-title">Ticket informatie</span>
+                    <table class="table table-striped text-successtable-border border-light pit-info-table">
+                        <tbody>
+                        <tr>
+                            <th scope="row">Aangemaakt door</th>
+                            <td th:text="${ticket.questioner.fullName}"></td>
+
+                        </tr>
+                        <tr>
+                            <th scope="row">Prioritijd</th>
+                            <td th:text="${ticket.priority.name}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Status</th>
+                            <td th:text="${ticket.status.name}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Ticket ID</th>
+                            <td th:text="${ticket.id}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Gemaakt op</th>
+                            <td th:text="${#temporals.format(ticket.createdAt,'dd-MM-yyyy HH:mm')}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Laatste activiteit</th>
+                            <td th:text="${#temporals.format(ticket.updatedAt,'dd-MM-yyyy HH:mm')}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Aantal reacties:</th>
+                            <td th:text="${ticket.comments.size()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+            </div>
+            <div class="pit-side-menu">
+                <span class="side-header-title">Snelle Links</span>
+                <div class="pit-side-menu-container">
+                   test
                 </div>
             </div>
-            <div class="wizard">
-                <nav class="list-group list-group-flush">
-                    <a class="list-group-item active" href="#">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div><i class="fa fa-shopping-bag mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">Orders List</div>
-                            </div><span class="badge badge-secondary">6</span>
-                        </div>
-                    </a><a class="list-group-item" href="https://www.bootdey.com/snippets/view/bs4-profile-settings-page" target="__blank"><i class="fa fa-user text-muted"></i>Profile Settings</a><a class="list-group-item" href="#"><i class="fa fa-map-marker text-muted"></i>Addresses</a>
-                    <a class="list-group-item" href="https://www.bootdey.com/snippets/view/bs4-wishlist-profile-page" tagert="__blank">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div><i class="fa fa-heart mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">My Wishlist</div>
-                            </div><span class="badge badge-secondary">3</span>
-                        </div>
-                    </a>
-                    <a class="list-group-item" href="#">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div><i class="fa fa-tag mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">My Tickets</div>
-                            </div><span class="badge badge-secondary">4</span>
-                        </div>
-                    </a>
-                </nav>
-            </div>
+
         </div>
     </div>
 </div>

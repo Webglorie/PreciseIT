@@ -15,5 +15,6 @@ public interface UserService {
     String generateSecret();
     User saveUser(User user);
     User findByEmail(String email);
+    User findById(String id);
 
 }
