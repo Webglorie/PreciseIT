@@ -40,6 +40,9 @@ public class User extends AbstractAuditable<User, Integer> {
     @OneToMany(mappedBy = "user")
     private Collection<Ticket> tickets;
 
+    @OneToMany(mappedBy = "user")
+    private Collection<ContactDetails> contactDetails;
+
     public User(String email, String firstName, String lastName, String password, Role role, String secret) {
         this.setCreatedDate(LocalDateTime.now());
         this.setLastModifiedDate(LocalDateTime.now());

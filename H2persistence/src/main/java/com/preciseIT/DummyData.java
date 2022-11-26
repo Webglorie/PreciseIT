@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DummyData {
 
-    public DummyData(@Autowired UserRepository UserRepository, @Autowired TicketRepository ticketRepository, @Autowired CompanyRepository companyRepository, @Autowired CommentRepository commentRepository, @Autowired StatusRepository statusRepository, @Autowired PriorityRepository priorityRepository) {
+    public DummyData(@Autowired UserRepository UserRepository, @Autowired TicketRepository ticketRepository, @Autowired CompanyRepository companyRepository, @Autowired CommentRepository commentRepository, @Autowired StatusRepository statusRepository, @Autowired PriorityRepository priorityRepository, @Autowired ContactDetailsRepository contactDetailsRepository, @Autowired ContactTypeRepository contactTypeRepository) {
         Status status1 = new Status();
         status1.setName("Nieuw");
 
@@ -29,6 +29,18 @@ public class DummyData {
         statusRepository.save(status3);
         statusRepository.save(status4);
         statusRepository.save(status5);
+
+        ContactType contactType1 = new ContactType();
+        contactType1.setName("E-mailadres");
+        contactTypeRepository.save(contactType1);
+
+        ContactType contactType2 = new ContactType();
+        contactType2.setName("Telefoonnummer");
+        contactTypeRepository.save(contactType2);
+
+        ContactType contactType3 = new ContactType();
+        contactType3.setName("Mobiele Telefoonnummer");
+        contactTypeRepository.save(contactType3);
 
         Priority priority1 = new Priority();
         priority1.setName("Hoog");
@@ -60,6 +72,18 @@ public class DummyData {
         User appUser5 = new User("bartrijnders94@gmail.com", "Bart", "Rijnders", "password", "CM1VHSO9KB", Role.ADMIN, company1);
         UserRepository.save(appUser4);
         UserRepository.save(appUser5);
+
+        ContactDetails contactDetails1 = new ContactDetails();
+        contactDetails1.setUser(appUser4);
+        contactDetails1.setContactType(contactType3);
+        contactDetails1.setText("0615377041");
+        contactDetailsRepository.save(contactDetails1);
+
+        ContactDetails contactDetails2 = new ContactDetails();
+        contactDetails2.setUser(appUser4);
+        contactDetails2.setContactType(contactType1);
+        contactDetails2.setText("info@webglorie.nl");
+        contactDetailsRepository.save(contactDetails2);
 
         String sampleContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br>Feugiat in ante metus dictum at tempor. A erat nam at lectus. Imperdiet dui accumsan sit amet. Nibh sit amet commodo nulla. Curabitur vitae nunc sed velit dignissim sodales. Et magnis dis parturient montes nascetur. Tristique risus nec feugiat in. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. Pretium lectus quam id leo in vitae.";
 
