@@ -23,13 +23,11 @@
     <div class="row pit-home-starttext">
             <div class="col-8">
                 <div class="pit-title-box">
-                    <span class="pit-header-title">Welkom terug!</span>
+                    <span class="pit-header-title">Welkom terug, <span th:text="${user.fullName}"></span>!</span>
                     <div class="pit-title-box-container">
                         <div class="pit-ticket-form">
                             <div class="pit-ticket-form-container">
                                 <div class="pit-ticket-form-intro">
-                                    <p>Uw e-mailadres is: <span th:text="${username}"></span></p>
-                                    <p>User info: <span th:text="${password}"></span></p>
                                     <p>Via het onderstaande formulier kunt u op een eenvoudige manier een nieuwe melding maken. Indien het gaat om een Prio 1 spoed melding gebruik dan de "Spoed melding" knop.</p>
                                 </div>
                             </div>
@@ -121,12 +119,12 @@
                     <!-- Account Sidebar-->
                 <div class="pit-side-menu">
                     <div class="author-card pb-3">
-                        <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"><a class="btn btn-style-1 btn-white btn-sm" href="#" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward points to spend"><i class="fa fa-award text-md"></i>&nbsp;290 points</a></div>
+                        <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"><span class="btn pt-2 btn-style-1 btn-sm" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward points to spend"><span th:text="${user.company.name}"></span></span></div>
                         <div class="author-card-profile">
                             <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams">
                             </div>
                             <div class="author-card-details">
-                                <h5 class="author-card-name text-lg"><span th:text="${user.fullName}"></span></h5><span class="author-card-position">Joined February 06, 2017</span>
+                                <h5 class="author-card-name text-lg"><span th:text="${user.fullName}"></span></h5><span class="author-card-position" th:text="${user.role.getAuthority()}">Joined February 06, 2017</span>
                             </div>
                         </div>
                     </div>

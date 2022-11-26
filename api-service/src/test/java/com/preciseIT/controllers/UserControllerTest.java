@@ -1,6 +1,7 @@
 package com.preciseIT.controllers;
 
 import com.preciseIT.auth.service.UserService;
+import com.preciseIT.entities.Company;
 import com.preciseIT.entities.User;
 import com.preciseIT.enums.Role;
 import com.preciseIT.repos.UserRepository;
@@ -36,8 +37,10 @@ class UserControllerTest {
     void setUp() {
         userRepository = mock(UserRepository.class);
         userService = mock(UserService.class);
-        User appUser1 = new User("b.rijnders@thedoc.nl", "Bart", "Rijnders", "password", Role.ADMIN);
-        User appUser2 = new User("Testarjen@gmail.com", "Arjen", "Froma", "password", "YJXWKFYWYO", Role.CLIENT);
+        Company company1 = new Company();
+        company1.setName("Precise IT");
+        User appUser1 = new User("b.rijnders@thedoc.nl", "Bart", "Rijnders", "password", Role.ADMIN, company1);
+        User appUser2 = new User("Testarjen@gmail.com", "Arjen", "Froma", "password", "YJXWKFYWYO", Role.CLIENT, company1);
         Iterable<User> users = new ArrayList<>(List.of(appUser1, appUser2));
         when(userRepository.findAll()).thenReturn(users);
         when(userRepository.save(any(User.class))).thenReturn(appUser1);
@@ -59,7 +62,9 @@ class UserControllerTest {
 
     @Test
     void saveNewUser() {
-        User appUser1 = new User("b.rijnders@thedoc.nl", "Bart", "Rijnders", "password", Role.ADMIN);
+        Company company1 = new Company();
+        company1.setName("Precise IT");
+        User appUser1 = new User("b.rijnders@thedoc.nl", "Bart", "Rijnders", "password", Role.ADMIN, company1);
         User result = userController.saveNewUser(appUser1);
         assertEquals(appUser1.getEmail(), result.getEmail());
         assertEquals(appUser1.getFirstName(), result.getFirstName());

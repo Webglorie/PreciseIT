@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DummyData {
 
-    public DummyData(@Autowired UserRepository UserRepository, @Autowired TicketRepository ticketRepository, @Autowired CommentRepository commentRepository, @Autowired StatusRepository statusRepository, @Autowired PriorityRepository priorityRepository) {
+    public DummyData(@Autowired UserRepository UserRepository, @Autowired TicketRepository ticketRepository, @Autowired CompanyRepository companyRepository, @Autowired CommentRepository commentRepository, @Autowired StatusRepository statusRepository, @Autowired PriorityRepository priorityRepository) {
         Status status1 = new Status();
         status1.setName("Nieuw");
 
@@ -43,15 +43,21 @@ public class DummyData {
         priorityRepository.save(priority2);
         priorityRepository.save(priority3);
 
+        Company company1 = new Company("Precise IT");
+        companyRepository.save(company1);
 
-        User appUser1 = new User("b.rijnders@thedoc.nl", "Bart", "Rijnders", "password", Role.ADMIN);
+        Company company2 = new Company("Fontys");
+        companyRepository.save(company2);
+
+
+        User appUser1 = new User("b.rijnders@thedoc.nl", "Bart", "Rijnders", "password", Role.ADMIN, company2);
         UserRepository.save(appUser1);
-        User appUser2 = new User("Testarjen@gmail.com", "Arjen", "Froma", "password", "YJXWKFYWYO", Role.CLIENT);
+        User appUser2 = new User("Testarjen@gmail.com", "Arjen", "Froma", "password", "YJXWKFYWYO", Role.CLIENT, company2);
         UserRepository.save(appUser2);
-        User appUser3 = new User("282859@thedoc.nl", "Bart", "Rijnders", "password", Role.COMPANYADMIN);
+        User appUser3 = new User("282859@thedoc.nl", "Bart", "Rijnders", "password", Role.COMPANYADMIN, company1);
         UserRepository.save(appUser3);
-        User appUser4 = new User("Testadmin@gmail.com", "Arjen", "Froma", "password", "TTEO2UXZ7X", Role.ADMIN);
-        User appUser5 = new User("bartrijnders94@gmail.com", "Bart", "Rijnders", "password", "CM1VHSO9KB", Role.ADMIN);
+        User appUser4 = new User("Testadmin@gmail.com", "Arjen", "Froma", "password", "TTEO2UXZ7X", Role.ADMIN, company1);
+        User appUser5 = new User("bartrijnders94@gmail.com", "Bart", "Rijnders", "password", "CM1VHSO9KB", Role.ADMIN, company1);
         UserRepository.save(appUser4);
         UserRepository.save(appUser5);
 
