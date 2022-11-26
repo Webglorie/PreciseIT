@@ -170,10 +170,16 @@
                     </table>
             </div>
             <div class="pit-side-menu">
-                <span class="side-header-title">Snelle Links</span>
-                <div class="pit-side-menu-container">
-                   test
-                </div>
+                <span class="side-header-title">Contact Informatie</span>
+                <table class="table table-striped text-successtable-border border-light pit-info-table">
+                    <tbody>
+                    <tr th:each="contactDetail : ${listContactDetails}">
+                        <th scope="row"><span th:text="${contactDetail.contactType.name}"></span></th>
+                        <td><span th:text="${contactDetail.text}"></span></td>
+
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
         </div>

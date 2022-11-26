@@ -1,24 +1,21 @@
 package com.preciseIT.webapp.controller;
 
-import com.preciseIT.auth.service.CommentService;
-import com.preciseIT.auth.service.StatusService;
-import com.preciseIT.auth.service.TicketService;
-import com.preciseIT.auth.service.UserService;
-import com.preciseIT.entities.Comment;
-import com.preciseIT.entities.Status;
-import com.preciseIT.entities.Ticket;
-import com.preciseIT.entities.User;
+import com.preciseIT.auth.service.*;
+import com.preciseIT.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/portal")
@@ -32,6 +29,9 @@ public class PortalController {
 
     @Autowired
     StatusService statusService;
+
+    @Autowired
+    PriorityService priorityService;
 
     @Autowired
     CommentService commentService;
@@ -89,9 +89,35 @@ public class PortalController {
         return principal.getName();
     }
 
-    @RequestMapping("/create-ticket")
-    public String showCreateTicket(){
-        return "portal/portal-createticket";
+    @GetMapping("/create-ticket")
+    public String newPost(HttpServletRequest request, Model model) {
+
+        User user = userService.findByEmail(request.getUserPrincipal().getName());
+        model.addAttribute("user", user);
+
+        if (user != null) {
+            Ticket ticket = new Ticket();
+            ticket.setQuestioner(user);
+            ticket.setStatus(statusService.getStatusById(1));
+            ticket.setPriority(priorityService.getPriorityById(1));
+            model.addAttribute("ticket", ticket);
+
+            return "portal/portal-createticket";
+
+        } else {
+            return "/error";
+        }
+    }
+
+    @PostMapping("/create-ticket")
+    public String createNewPost(@Valid Ticket ticket, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return "portal/portal-createticket";
+        } else {
+            ticketService.save(ticket);
+            return "redirect:/portal/dashboard?status=success";
+        }
     }
 
     @RequestMapping("/create-ticketByHelpDesk")
@@ -103,9 +129,11 @@ public class PortalController {
     public String ticket(Model model, String ticketId, @PathVariable String tickId) {
         Ticket ticket = ticketService.getTicketById(tickId);
         List<Comment> listComments = commentService.findCommentByTicket(ticket);
+
         Collections.reverse(listComments);
         model.addAttribute("ticket", ticket);
         model.addAttribute("listComments", listComments);
+        model.addAttribute("listContactDetails", ticket.getQuestioner().getContactDetails());
 
         return "portal/portal-ticket";
     }

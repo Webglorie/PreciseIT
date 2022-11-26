@@ -47,7 +47,7 @@ public class Ticket extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     Priority priority;
 
-    @Column(name = "ticketcontent", length = 4000)
+    @Column(name = "ticketcontent", length = 4000, columnDefinition = "TEXT")
     private String ticketContent;
 
     @OneToMany(mappedBy = "ticket", cascade = CascadeType.REMOVE)
@@ -57,7 +57,7 @@ public class Ticket extends BaseEntity {
     @JoinColumn(name = "questioner_id", referencedColumnName = "id", insertable=false, updatable=false)
     private User user;
 
-    public Ticket(String title, User questioner, User assignee, User createdBy) {
+    public Ticket(String title, User questioner, User assignee) {
         this.title = title;
         this.questioner = questioner;
         this.assignee = assignee;

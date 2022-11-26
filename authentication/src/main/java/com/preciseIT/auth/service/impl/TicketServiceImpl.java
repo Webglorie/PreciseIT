@@ -89,4 +89,9 @@ public class TicketServiceImpl implements TicketService {
         return ticketRepository.findByStatus(ticketStatus);
     }
 
+    @Override
+    public Ticket save(Ticket ticket) {
+        return ticketRepository.save(ticket);
+    }
+
 }

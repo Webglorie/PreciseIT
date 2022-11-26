@@ -45,8 +45,6 @@
                                     <tr>
                                         <th>Ticket ID</th>
                                         <th>Titel</th>
-
-                                        <th>Gekoppeld aan</th>
                                         <th>Gemaakt door</th>
                                         <th>Prioriteit</th>
                                         <th>Status</th>
@@ -60,7 +58,6 @@
                                         <td th:text="${ticket.id}"></td>
                                         <td th:text="${ticket.title}"></td>
 
-                                        <td th:text="${ticket.assignee.getFullName}"></td>
                                         <td th:text="${ticket.questioner.getFullName}"></td>
                                         <td th:text="${ticket.priority.name}"></td>
                                         <td th:text="${ticket.status.name}"></td>

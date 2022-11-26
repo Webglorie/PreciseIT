@@ -14,4 +14,5 @@ public interface TicketService {
     Ticket getById(String id);
     Ticket getTicketById(String id);
     List<Ticket> getByStatus(String statusid);
+    Ticket save(Ticket ticket);
 }

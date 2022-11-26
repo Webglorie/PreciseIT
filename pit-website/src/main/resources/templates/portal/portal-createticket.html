@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Ingelogd - Precise IT</title>
@@ -15,46 +16,174 @@
 <div th:replace="portal/fragments/general.html :: header-menu"></div>
 <div class="px-4 py-5 my-5 pit-page-title">
     <div class="container">
-        <h1 class="float-start">Maak een nieuwe ticket</h1>
+        <h1 class="float-start">Selfservice Portaal</h1>
     </div>
 </div>
 <div class="container">
     <div class="row pit-home-starttext">
-        <div class="col-md-6">
-            <p>Succesvol ingelogd. <div th:text="${username}"></div></p>
+        <div class="col-8">
+            <div class="pit-title-box">
+                <span class="pit-header-title">Welkom terug, <span th:text="${user.fullName}"></span>!</span>
+                <div class="pit-title-box-container">
+                    <div class="pit-ticket-form">
+                        <div class="pit-ticket-form-container">
+                            <div class="pit-ticket-form-intro">
+                                <p>Via het onderstaande formulier kunt u op een eenvoudige manier een nieuwe melding maken. Indien het gaat om een Prio 1 spoed melding gebruik dan de "Spoed melding" knop.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pit-title-box">
+                <span class="pit-header-title">Maak een nieuwe melding</span>
+                <div class="pit-title-box-container">
+                    <div class="pit-ticket-form">
+                        <div class="pit-ticket-form-container">
+                            <div class="pit-ticket-form-intro">
+                                <p>Via het onderstaande formulier kunt u op een eenvoudige manier een nieuwe melding maken. Indien het gaat om een Prio 1 spoed melding gebruik dan de "Spoed melding" knop.</p>
+                            </div>
+                            <div class="pit-ticket-form-question-1">
+                                <span class="question-title">Wat voor ticket wilt u aanmaken?</span>
+                                <button type="button" id="ServiceMeldingButton" class="btn btn-primary">Serviceaanvraag</button>
+                                <button type="button" id="IncidentMeldingButton" class="btn btn-primary">Incident</button>
+                                <button type="button" id="SpoedMeldingButton" class="btn btn-primary">Spoed Melding</button>
+                            </div>
+                            <div id="service-form" class="pit-ticket-form-serviceticket">
+                                <span class="pit-ticket-form-title">Serviceaanvraag melding maken</span>
+                                Hier komt het formulier
 
-            <div class="container px-5 my-5">
-                <form id="contactForm">
-                    <div class="mb-3">
-                        <label class="form-label" for="uwId">Uw ID</label>
-                        <input class="form-control" id="uwId" type="text" placeholder="Uw ID" data-sb-validations="required" />
-                        <div class="invalid-feedback" data-sb-feedback="uwId:required">Uw ID is required.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="apparaatId">Apparaat ID</label>
-                        <input class="form-control" id="apparaatId" type="text" placeholder="Apparaat ID" data-sb-validations="required" />
-                        <div class="invalid-feedback" data-sb-feedback="apparaatId:required">Apparaat ID is required.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="probleemBeschrijving">Probleem beschrijving</label>
-                        <textarea class="form-control" id="probleemBeschrijving" type="text" placeholder="Probleem beschrijving" style="height: 10rem;" data-sb-validations="required"></textarea>
-                        <div class="invalid-feedback" data-sb-feedback="probleemBeschrijving:required">Probleem beschrijving is required.</div>
-                    </div>
-                    <div class="d-none" id="submitErrorMessage">
-                        <div class="text-center text-danger mb-3">Error sending message!</div>
-                    </div>
-                    <div class="d-grid">
+                            </div>
+                            <div id="incident-form" class="pit-ticket-form-incidentticket">
+                                <span class="pit-ticket-form-title">Incident melding maken</span>
+                                Hier komt het formulier
+                            </div>
+                            <div id="priority-form" class="pit-ticket-form-priority">
+                                <span class="pit-ticket-form-title">Spoed melding maken</span>
 
-                        <a class="btn btn-primary btn-lg" id="btnCreateTicket">Maak ticket</a>
+                                <form action="#" autocomplete="off" class="form-horizontal"
+                                      method="post" role="form" th:action="@{/portal/create-ticket}"
+                                      th:object="${ticket}">
+
+                                    <input th:field="*{questioner}" type="hidden"/>
+                                    <input th:field="*{priority}" type="hidden"/>
+                                    <input th:field="*{status}" type="hidden"/>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="title">Titel</label>
+                                        <input class="form-control" th:field="*{title}" id="title" type="text" placeholder="title" data-sb-validations="required" />
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label" for="vertelOnsInHetKortWatErAanDeHandIsIndienHetOmEenElektronischeApparaatDieBijOnsInBeheerIsGraagOokHetApparaatnummerDoorgeven">Vertel ons in het kort wat er aan de hand is? Indien het om een elektronische apparaat die bij ons in beheer is graag ook het apparaatnummer doorgeven.</label>
+                                        <textarea  th:field="*{ticketContent}" class="form-control" id="vertelOnsInHetKortWatErAanDeHandIsIndienHetOmEenElektronischeApparaatDieBijOnsInBeheerIsGraagOokHetApparaatnummerDoorgeven" type="text" placeholder="Vertel ons in het kort wat er aan de hand is? Indien het om een elektronische apparaat die bij ons in beheer is graag ook het apparaatnummer doorgeven." style="height: 10rem;" data-sb-validations="required"></textarea>
+                                        <div class="invalid-feedback" data-sb-feedback="vertelOnsInHetKortWatErAanDeHandIsIndienHetOmEenElektronischeApparaatDieBijOnsInBeheerIsGraagOokHetApparaatnummerDoorgeven:required">Vertel ons in het kort wat er aan de hand is? Indien het om een elektronische apparaat die bij ons in beheer is graag ook het apparaatnummer doorgeven. is required.</div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label d-block">Hoe wilt u dat wij contact met u opnemen?</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="telefonisch" type="radio" name="hoeWiltUDatWijContactMetUOpnemen" data-sb-validations="" />
+                                            <label class="form-check-label" for="telefonisch">Telefonisch</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="viaDeMail" type="radio" name="hoeWiltUDatWijContactMetUOpnemen" data-sb-validations="" />
+                                            <label class="form-check-label" for="viaDeMail">Via de mail</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="viaMijnLeidinggevende" type="radio" name="hoeWiltUDatWijContactMetUOpnemen" data-sb-validations="" />
+                                            <label class="form-check-label" for="viaMijnLeidinggevende">Via mijn leidinggevende</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" id="anders" type="radio" name="hoeWiltUDatWijContactMetUOpnemen" data-sb-validations="" />
+                                            <label class="form-check-label" for="anders">Anders</label>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="andersNamelijk">Anders, namelijk:</label>
+                                        <input class="form-control" id="andersNamelijk" type="text" placeholder="Anders:" data-sb-validations="" />
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="telefoonnummer">Telefoonnummer</label>
+                                        <input class="form-control" id="telefoonnummer" type="text" placeholder="Telefoonnummer" data-sb-validations="required" />
+                                        <div class="invalid-feedback" data-sb-feedback="telefoonnummer:required">Telefoonnummer is required.</div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label" for="eMailadres">E-mailadres</label>
+                                        <input class="form-control" id="eMailadres" type="email" placeholder="E-mailadres" data-sb-validations="required,email" />
+                                        <div class="invalid-feedback" data-sb-feedback="eMailadres:required">E-mailadres is required.</div>
+                                        <div class="invalid-feedback" data-sb-feedback="eMailadres:email">E-mailadres Email is not valid.</div>
+                                    </div>
+                                    <div class="d-none" id="submitErrorMessage">
+                                        <div class="text-center text-danger mb-3">Error sending message!</div>
+                                    </div>
+                                    <div class="d-grid">
+                                        <button class="btn btn-primary btn-lg" id="submitButton" type="submit">Melding versturen</button>
+                                    </div>
+                                </form>
+
+
+                            </div>
+                        </div>
                     </div>
-                </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <!-- Account Sidebar-->
+            <div class="pit-side-menu">
+                <div class="author-card pb-3">
+                    <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"><span class="btn pt-2 btn-style-1 btn-sm" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward points to spend"><span th:text="${user.company.name}"></span></span></div>
+                    <div class="author-card-profile">
+                        <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams">
+                        </div>
+                        <div class="author-card-details">
+                            <h5 class="author-card-name text-lg"><span th:text="${user.fullName}"></span></h5><span class="author-card-position" th:text="${user.role.getAuthority()}">Joined February 06, 2017</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="wizard">
+                    <nav class="list-group list-group-flush">
+                        <a class="list-group-item" href="/portal/ticket/viewTickets">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="fa fa-tag mr-1 text-muted"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Mijn tickets</div>
+                                </div><span class="badge badge-secondary"><span th:text="${user.tickets.size()}"></span></span>
+                            </div>
+                        </a>
+                        <a class="list-group-item active" href="#">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="fa fa-shopping-bag mr-1 text-muted"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Profiel instellingen</div>
+                                </div><span class="badge badge-secondary">6</span>
+                            </div>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+            <div class="pit-side-menu">
+                <span class="side-header-title">Meldingen</span>
+                <div class="pit-side-menu-container">
+                    <table id="notificationTable">
+                        <tr>
+                            <td>Gepland server onderhoud 10-11-2022 na 18:00, mogelijk traagheid.</td>
+                        </tr>
+                        <tr class="table-secondary">
+                            <td>Binnenkort Bingoavond met de doorgewinterde bingoleider Bart!</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="pit-side-menu">
+                <span class="side-header-title">Snelle Links</span>
+                <div class="pit-side-menu-container">
+                    <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/create-ticket">Nieuwe ticket maken</a></div>
+                    <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/create-ticket">Bekijk openstaande tickets</a></div>
+                    <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/create-ticket">Bekijk alle tickets</a></div>
+                    <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/create-ticketByHelpDesk">Maak ticket aan voor klant</a></div>
+                    <div class="pit-side-menu-item"> <a class="btn btn-outline-primary" id="btnLogout">Uitloggen</a></div>
+                </div>
             </div>
 
         </div>
-        <div class="col-md-6">
-            <img src="../images/contact-image.png">
 
-        </div>
     </div>
 </div>
 <div th:replace="portal/fragments/general.html :: footer"></div>
