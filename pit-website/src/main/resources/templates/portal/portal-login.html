@@ -24,6 +24,9 @@
             <div th:if="${usermsg}">
                 <span class="info" th:text="${usermsg}"></span>
             </div>
+            <div class="alert alert-danger d-none" th:classappend="${twofaEnabled}" role="alert">
+                2FA staat momenteel uit! Gebruik dit alleen voor testdoeleinden.
+            </div>
             <p>Vul het onderstaande formulier in om in te loggen in het helpdesk systeem van Precise IT.</p>
 
             <div class="custom-container container">

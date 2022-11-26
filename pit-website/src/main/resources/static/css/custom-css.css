@@ -589,6 +589,9 @@ span.badge {
 .pit-comment-col .user.d-flex.flex-row.align-items-center {
     max-width: 80%;
 }
+.twofactor-disabled-class {
+    display: block!important;
+}
 .reply small{
 
     color: #b7b4b4;

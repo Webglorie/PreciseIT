@@ -9,6 +9,7 @@ import com.preciseIT.entities.Status;
 import com.preciseIT.entities.Ticket;
 import com.preciseIT.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -35,6 +36,9 @@ public class PortalController {
     @Autowired
     CommentService commentService;
 
+    @Value("${2fa.enabled}")
+    private boolean isTwoFaEnabled;
+
 //    @RequestMapping("/portal")
 //    String index() {
 //        return "portal/portal-dashboard";
@@ -52,7 +56,12 @@ public class PortalController {
     }
 
     @RequestMapping("/login")
-    public String showPortalLogin(){
+    public String showPortalLogin(Model model){
+        if(!isTwoFaEnabled) {
+            model.addAttribute("twofaEnabled", "twofactor-disabled-class");
+        } else {
+            model.addAttribute("twofaEnabled", "");
+        }
         return "portal/portal-login";
     }
 
