@@ -34,7 +34,53 @@
                         </div>
                     </div>
                 </div>
+                <div th:if="${not #lists.isEmpty(listTicket)}">
+                <div class="pit-ticket-form">
+                    <div class="headings d-flex justify-content-between align-items-center mb-3">
+                        <h5>Uw meldingen</h5>
+
+                    </div>
+                    <div class="pit-ticket-form-container">
+
+                        <div class="pit-ticket-form-intro">
+                            <table id="pit-tickets-table"
+                                   class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Melding ID</th>
+                                    <th>Titel</th>
+                                    <th>Gemaakt door</th>
+                                    <th>Prioriteit</th>
+                                    <th>Status</th>
+                                    <th>Acties</th>
+
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr th:each="ticket : ${listTicket}">
+                                    <td th:text="${ticket.id}"></td>
+                                    <td th:text="${ticket.title}"></td>
+
+                                    <td th:text="${ticket.questioner.getFullName}"></td>
+                                    <td th:text="${ticket.priority.name}"></td>
+                                    <td th:text="${ticket.status.name}"></td>
+                                    <td class="text-center">
+                                        <!-- <a class="nav-link"
+                                                                type="button"  th:href="@{/ticket/{${ticket.id}}">Update</a> -->
+                                        <a th:href="@{/portal/ticket/{id}(id=${ticket.id})}"><i class="fas fa-eye"></i></a>
+
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
             </div>
+                </div>
             <div class="col-4">
                     <!-- Account Sidebar-->
                 <div class="pit-side-menu">
@@ -44,7 +90,7 @@
                             <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams">
                             </div>
                             <div class="author-card-details">
-                                <h5 class="author-card-name text-lg"><span th:text="${user.fullName}"></span></h5><span class="author-card-position" th:text="${user.role.getAuthority()}">Joined February 06, 2017</span>
+                                <h5 class="author-card-name text-lg"><span th:text="${user.fullName}"></span></h5><span class="author-card-position" th:text="${user.role}">Joined February 06, 2017</span>
                             </div>
                         </div>
                     </div>
@@ -53,7 +99,7 @@
                             <a class="list-group-item" href="/portal/ticket/viewTickets">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div><i class="fa fa-tag mr-1 text-muted"></i>
-                                        <div class="d-inline-block font-weight-medium text-uppercase">Mijn tickets</div>
+                                        <div class="d-inline-block font-weight-medium text-uppercase">Mijn Meldingen</div>
                                     </div><span class="badge badge-secondary"><span th:text="${user.tickets.size()}"></span></span>
                                 </div>
                             </a>
@@ -83,9 +129,8 @@
                 <div class="pit-side-menu">
                     <span class="side-header-title">Snelle Links</span>
                     <div class="pit-side-menu-container">
-                        <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/create-ticket">Nieuwe ticket maken</a></div>
-                        <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/create-ticket">Bekijk openstaande tickets</a></div>
-                        <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/create-ticket">Bekijk alle tickets</a></div>
+                        <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/create-ticket">Nieuwe melding maken</a></div>
+                        <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/ticket/viewTickets">Bekijk openstaande tickets</a></div>
                         <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/create-ticketByHelpDesk">Maak ticket aan voor klant</a></div>
                         <div class="pit-side-menu-item"> <a class="btn btn-outline-primary" id="btnLogout">Uitloggen</a></div>
                     </div>

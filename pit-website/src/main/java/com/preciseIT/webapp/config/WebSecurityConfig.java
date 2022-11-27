@@ -11,12 +11,23 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.filter.GenericFilterBean;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring5.ISpringTemplateEngine;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 
 @Configuration
@@ -26,14 +37,18 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 @EnableJpaAuditing
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth)
-            throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER")
-                .and()
-                .withUser("admin").password("admin").roles("ADMIN");
+    class LoginPageFilter extends GenericFilterBean {
+
+        @Override
+        public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+            if (SecurityContextHolder.getContext().getAuthentication() != null
+                    && SecurityContextHolder.getContext().getAuthentication().isAuthenticated()
+                    && ((HttpServletRequest)request).getRequestURI().equals("/portal/login")) {
+                ((HttpServletResponse)response).sendRedirect("/portal/dashboard");
+            }
+            chain.doFilter(request, response);
+        }
+
     }
 
 
@@ -43,6 +58,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.addFilterBefore(
+                new LoginPageFilter(), DefaultLoginPageGeneratingFilter.class);
+
         http
                 .csrf().disable()
                 .authorizeRequests()
@@ -74,9 +92,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/portal/logout-succes",
                         "/portal/create-ticket",
                         "/portal/tickets",
-                        "/portal/create-ticket/**",
-                        "/tickets/create-ticket",
-                        "/tickets/create-ticket/**",
                         "/authenticate/**/",
                         "/authenticate/**/**",
                         "/authenticate/*/*")

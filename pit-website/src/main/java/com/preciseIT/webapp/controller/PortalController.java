@@ -52,6 +52,10 @@ public class PortalController {
         User user = userService.findByEmail(request.getUserPrincipal().getName());
         model.addAttribute("user", user);
 
+        List<Ticket> listTicket = ticketService.findTicketsByActiveUser(request.getUserPrincipal().getName());
+        model.addAttribute("listTicket", listTicket);
+        Collections.reverse(listTicket);
+
         return "portal/portal-dashboard";
     }
 
@@ -126,7 +130,7 @@ public class PortalController {
         return "portal/portal-createTicketByHelpdesk";
     }
     @RequestMapping(value = "/ticket/{tickId}", method = RequestMethod.GET)
-    public String ticket(Model model, String ticketId, @PathVariable String tickId) {
+    public String ticket(Model model, @PathVariable String tickId) {
         Ticket ticket = ticketService.getTicketById(tickId);
         List<Comment> listComments = commentService.findCommentByTicket(ticket);
 

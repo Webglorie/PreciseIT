@@ -36,9 +36,16 @@
                 </div>
             </div>
                     <div class="pit-ticket-form">
+                        <div class="headings d-flex justify-content-between align-items-center mb-3">
+                            <h5>Uw meldingen</h5>
+
+                        </div>
                         <div class="pit-ticket-form-container">
                             <div class="pit-ticket-form-intro">
-
+                                <div th:if="${#lists.isEmpty(listTicket)}">
+                                    <span style="color: #f63131;">Geen meldingen gevonden.</span>
+                                </div>
+                                <div th:if="${not #lists.isEmpty(listTicket)}">
                                 <table id="pit-tickets-table"
                                        class="table table-striped table-bordered">
                                     <thead>
@@ -72,6 +79,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                                </div>
                         </div>
                     </div>
             </div>

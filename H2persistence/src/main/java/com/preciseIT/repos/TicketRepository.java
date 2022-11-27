@@ -23,6 +23,6 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
    Ticket getById(int id);
    List<Ticket> findByQuestioner(@Param("questioner_id") User user);
    List<Ticket> findByStatus(@Param("status_id") Status status);
-
+   int countTicketsByStatus(Status status);
 
 }

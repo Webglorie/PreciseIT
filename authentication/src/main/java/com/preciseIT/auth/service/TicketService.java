@@ -1,5 +1,6 @@
 package com.preciseIT.auth.service;
 
+import com.preciseIT.entities.Status;
 import com.preciseIT.entities.Ticket;
 import com.preciseIT.entities.User;
 
@@ -15,4 +16,5 @@ public interface TicketService {
     Ticket getTicketById(String id);
     List<Ticket> getByStatus(String statusid);
     Ticket save(Ticket ticket);
+    int countTicketsByStatus(Status status);
 }
