@@ -108,19 +108,20 @@ $("#btnLogout,#btnLogoutHeader").click(function () {
     window.location.replace("/portal/logout-succes")
   });
 });
-
-document.getElementById('emailCheck').onchange = function() {
-  document.getElementById('eMailadres').disabled = this.checked === false;
-};
-document.getElementById('firstNameCheck').onchange = function() {
-  document.getElementById('firstName').disabled = this.checked === false;
-};
-document.getElementById('lastNameCheck').onchange = function() {
-  document.getElementById('lastName').disabled = this.checked === false;
-};
-document.getElementById('passwordCheck').onchange = function() {
-  document.getElementById('password').disabled = this.checked === false;
-};
-document.getElementById('twoFactorCheck').onchange = function() {
-  document.getElementById('twoFactorKey').disabled = this.checked === false;
-};
+if ($('#emailCheck').length > 0) {
+  document.getElementById('emailCheck').onchange = function () {
+    document.getElementById('eMailadres').disabled = this.checked === false;
+  };
+  document.getElementById('firstNameCheck').onchange = function () {
+    document.getElementById('firstName').disabled = this.checked === false;
+  };
+  document.getElementById('lastNameCheck').onchange = function () {
+    document.getElementById('lastName').disabled = this.checked === false;
+  };
+  document.getElementById('passwordCheck').onchange = function () {
+    document.getElementById('password').disabled = this.checked === false;
+  };
+  document.getElementById('twoFactorCheck').onchange = function () {
+    document.getElementById('twoFactorKey').disabled = this.checked === false;
+  };
+}

@@ -286,7 +286,7 @@ table#notificationTable td {
 .pit-side-menu-container{
     padding: 15px;
 }
-.pit-side-menu-item a.btn {
+.pit-side-menu-item a.btn, .pit-side-menu-item button.w-100 {
     width: 100%;
     margin: 8px 0px;
 

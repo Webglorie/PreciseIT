@@ -85,6 +85,18 @@ public class DummyData {
         contactDetails2.setText("info@webglorie.nl");
         contactDetailsRepository.save(contactDetails2);
 
+        ContactDetails contactDetails3 = new ContactDetails();
+        contactDetails3.setUser(appUser2);
+        contactDetails3.setContactType(contactType1);
+        contactDetails3.setText("priveadres@fontys.nl");
+        contactDetailsRepository.save(contactDetails3);
+
+        ContactDetails contactDetails4 = new ContactDetails();
+        contactDetails4.setUser(appUser2);
+        contactDetails4.setContactType(contactType1);
+        contactDetails4.setText("040-8371-388");
+        contactDetailsRepository.save(contactDetails4);
+
         String sampleContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br>Feugiat in ante metus dictum at tempor. A erat nam at lectus. Imperdiet dui accumsan sit amet. Nibh sit amet commodo nulla. Curabitur vitae nunc sed velit dignissim sodales. Et magnis dis parturient montes nascetur. Tristique risus nec feugiat in. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat. Pretium lectus quam id leo in vitae.";
 
         Ticket ticket1 = new Ticket("hulp nodig bij starten laptop", appUser4, appUser1, status5, priority2, sampleContent);
@@ -95,10 +107,16 @@ public class DummyData {
         ticketRepository.save(ticket3);
         Ticket ticket5 = new Ticket("Blauw scherm na opstarten", appUser3, appUser2, status2, priority3, sampleContent);
         ticketRepository.save(ticket5);
-        Ticket ticket6 = new Ticket("Muis werkt niet", appUser4, appUser2, status1, priority1, sampleContent);
+        Ticket ticket6 = new Ticket("Muis werkt niet", appUser4, appUser2, status3, priority1, sampleContent);
         ticketRepository.save(ticket6);
         Ticket ticket4 = new Ticket("Test voor filters", appUser3, appUser1,  status1, priority3, sampleContent);
         ticketRepository.save(ticket4);
+        Ticket ticket7 = new Ticket("Foutmelding bij het openen van document", appUser2, appUser3,  status1, priority3, sampleContent);
+        ticketRepository.save(ticket7);
+        Ticket ticket8 = new Ticket("Computer start langzaam op", appUser2, appUser5,  status4, priority2, sampleContent);
+        ticketRepository.save(ticket8);
+        Ticket ticket9 = new Ticket("Wachtwoord wijzigen lukt niet", appUser2, appUser5,  status4, priority1, sampleContent);
+        ticketRepository.save(ticket9);
 
         Comment comment1 = new Comment();
         comment1.setText("Beste Johan, kan u mij iets meer informatie sturen over het probleem? Dan pakken wij het zo snel mogelijk op.");
@@ -115,8 +133,23 @@ public class DummyData {
         comment3.setText("Hierbij de informatie: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
         comment3.setTicket(ticket1);
         commentRepository.save(comment3);
+        Comment comment4 = new Comment();
+        comment4.setText("Beste Arjen, wij hebben u proberen te bellen maar konden u niet bereiken, zou u ons willen bellen op 040-7289-298. Alvast bedankt");
+        comment4.setUser(appUser1);
+        comment4.setTicket(ticket9);
+        commentRepository.save(comment4);
 
+        Comment comment5 = new Comment();
+        comment5.setText("Beste Arjen, wij hebben u proberen te bellen maar konden u niet bereiken, zou u ons willen bellen op 040-7289-298. Alvast bedankt");
+        comment5.setUser(appUser1);
+        comment5.setTicket(ticket8);
+        commentRepository.save(comment5);
 
+        Comment comment6 = new Comment();
+        comment6.setText("Beste Arjen, wij hebben u proberen te bellen maar konden u niet bereiken, zou u ons willen bellen op 040-7289-298. Alvast bedankt");
+        comment6.setUser(appUser1);
+        comment6.setTicket(ticket7);
+        commentRepository.save(comment6);
     }
 
 }

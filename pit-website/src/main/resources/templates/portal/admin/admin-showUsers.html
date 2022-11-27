@@ -22,12 +22,12 @@
     <div class="row pit-home-starttext">
         <div class="col-9">
             <div class="pit-title-box">
-                <span class="pit-header-title">Alle gebruikers</span>
+                <span class="pit-header-title">Overzicht van alle gebruikers</span>
                 <div class="pit-title-box-container">
                     <div class="pit-ticket-form">
                         <div class="pit-ticket-form-container">
                             <div class="pit-ticket-form-intro">
-                                <p>Via het onderstaande formulier kunt u op een eenvoudige manier een nieuwe melding maken. Indien het gaat om een Prio 1 spoed melding gebruik dan de "Spoed melding" knop.</p>
+                                <p>Op deze pagina is een overzicht van alle gebruikers te vinden, voor het wijzigen van een gebruiker dient er te worden geklikt op het blauwe Pen icoontje naast de betreffende gebruiker.</p>
 
                             </div>
                         </div>
@@ -77,24 +77,14 @@
         </div>
         <div class="col-3">
             <div class="pit-side-menu">
-                <span class="side-header-title">Zoek op Ticket ID</span>
+                <span class="side-header-title">Zoek een Gebruiker</span>
                 <div class="pit-side-menu-container">
                     <div class="pit-filter-searchbox">
-                        <form th:action="@{/portal/ticket/viewTickets/status}" method="get">
-                            <input type="text" name="status" th:value="${status}"  placeholder="Ticket ID" size="50" >
+                        <form  method="get">
+                            <input type="text" name="status"   placeholder="Vul een naam in" size="50" >
                             <button type="submit" class="btn btn-outline-primary" >Zoeken</button>
                             <button type="submit" class="btn btn-outline-primary" >Reset</button>
                         </form>
-                    </div>
-                </div>
-            </div>
-            <div class="pit-side-menu">
-                <span class="side-header-title">Snelle Links</span>
-                <div class="pit-side-menu-container">
-                    <div class="pit-filters">
-                        <div class="pit-side-menu-item" th:each="status : ${listStatus}">
-                            <a class="btn btn-outline-primary" th:text="${status.name}" th:href="@{/portal/ticket/viewTickets/status?status={id}(id=${status.id})}"></a>
-                        </div>
                     </div>
                 </div>
             </div>
