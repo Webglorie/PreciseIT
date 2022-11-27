@@ -541,11 +541,8 @@ span.badge {
     display: inline-block;
 }
 
-.badge{
-
-    padding: 7px;
-    padding-right: 9px;
-    padding-left: 16px;
+.badge {
+    padding: 8px;
     box-shadow: 5px 6px 6px 2px #e9ecef;
 }
 
@@ -601,4 +598,9 @@ span.badge {
     color: green;
     cursor: pointer;
 
+}
+.chart-container {
+    width: 50%;
+    height: 50%;
+    margin: auto;
 }
