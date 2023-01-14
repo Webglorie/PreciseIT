@@ -6,9 +6,10 @@ import com.preciseIT.repos.UserRepository;
 import org.apache.commons.codec.binary.Base32;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController {
 
@@ -39,6 +40,11 @@ public class UserController {
         String encodedSecret = new Base32().encodeToString(user.getSecret().getBytes());
 
         return encodedSecret.replace("=", "");
+    }
+
+    @GetMapping("/settings")
+    public String changeSettings() {
+        return "portal/portal-settings";
     }
 
 

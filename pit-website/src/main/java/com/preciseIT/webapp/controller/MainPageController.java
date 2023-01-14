@@ -25,8 +25,6 @@ import java.util.List;
 
 @Controller
 public class MainPageController {
-    @Autowired
-    private UserService userService;
 
     private final String appMode;
 
@@ -38,10 +36,6 @@ public class MainPageController {
         appMode = environment.getProperty("app-mode");
     }
 
-    @RequestMapping("/portal")
-    String index() {
-        return "portal/portal-dashboard";
-    }
 
     @RequestMapping("/contact")
     public String contact(){
@@ -54,53 +48,7 @@ public class MainPageController {
         return "index";
     }
 
-    @RequestMapping("/portal/dashboard")
-    public String showPortaal(HttpServletRequest request, Model model) {
-        model.addAttribute("username", request.getUserPrincipal().getName());
-        model.addAttribute("password", request.getUserPrincipal().toString());
 
-        return "portal/portal-dashboard";
-    }
-
-    @RequestMapping("/portal/login")
-    public String showPortalLogin(){
-        return "portal/portal-login";
-    }
-
-    @RequestMapping("/portal/registration")
-    public String showPortalRegistration(){
-        return "portal/portal-registration";
-    }
-
-    @RequestMapping("/portal/logout-succes")
-    public String showPortalLogout(){
-        return "portal/portal-logout";
-    }
-
-
-    @GetMapping("/portal/users")
-    public String listRegisteredUsers(Model model){
-        List<User> users = (List<User>) userService.findAll();
-        model.addAttribute("users", users);
-        return "portal/portal-users";
-    }
-
-    @RequestMapping(value = "/username", method = RequestMethod.GET)
-    @ResponseBody
-    public String currentUserName(Principal principal) {
-        return principal.getName();
-    }
-
-    @RequestMapping("/portal/create-ticket")
-    public String showCreateTicket(){
-        return "portal/portal-createticket";
-    }
-
-    @RequestMapping("/portal/create-ticketByHelpDesk")
-    public String showCreateTicketByHelpdesk() {
-        System.out.println("hello world");
-        return "portal/portal-createTicketByHelpdesk";
-    }
 
 
 }

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets - Precise IT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Precise IT Website"/>
+    <meta name="author" content="Bart Rijnders, Arjen Froma"/>
+
+    <div th:replace="portal/fragments/general.html :: headerfiles"></div>
+
+
+</head>
+<body>
+<div th:replace="portal/fragments/general.html :: header-menu"></div>
+<div class="px-4 py-5 my-5 pit-page-title">
+    <div class="container">
+        <h1 class="float-start">Tickets</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row pit-home-starttext">
+        <div class="col-8">
+            <div class="pit-title-box">
+                <span class="pit-header-title">Ticket #<span th:text="${ticket.id}"></span> - <span th:text="${ticket.title}"></span></span>
+                <div class="pit-title-box-container">
+                    <div class="pit-ticket-form">
+                        <div class="pit-ticket-form-container">
+                            <div class="pit-ticket-form-intro">
+                                <p>
+                                    <span th:text="${ticket.ticketContent}"></span>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+                <div class="pit-comment-section row d-flex justify-content-center mb-4">
+
+                    <div class="col-md-12">
+
+                        <div class="headings d-flex justify-content-between align-items-center mb-3">
+                            <h5>Ticket Conversatie</h5>
+
+                        </div>
+
+
+                        <div class="pit-comment-col card mt-2" th:each="i : ${#numbers.sequence(ticket.comments.size() - 1, 0, -1)}"
+                             th:with="comment=${ticket.comments[i]}">
+
+                            <div class="d-flex justify-content-between align-items-center" >
+
+                                <div class="user d-flex flex-row align-items-center">
+
+                                    <span><h4>#<span th:text="${[i] + 1}">Body</span> - Reactie van: <span th:text="${comment.user.fullName}">Body</span></h4>
+                                        <small class="font-weight-bold"><span th:text="${comment.text}">Body</span> </small>
+                                    </span>
+
+
+                                </div>
+
+
+                                <small> <span th:text="${#temporals.format(comment.createdAt,'dd-MM-yyyy HH:mm')}"></span></small>
+
+                            </div>
+
+
+                            <div class="action d-flex justify-content-between mt-2 align-items-center">
+
+                                <div class="reply">
+                                    <small>Remove</small>
+                                    <span class="dots"></span>
+                                    <small>Reply</small>
+                                    <span class="dots"></span>
+                                    <small>Translate</small>
+
+                                </div>
+
+                                <div class="icons align-items-center">
+                                    <i class="fa fa-check-circle-o check-icon text-primary"></i>
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+                </div>
+
+            </div>
+            <div class="pit-title-box">
+                <span class="pit-header-title">Plaats een nieuwe reactie</span>
+                <div class="pit-title-box-container">
+                    <div class="pit-ticket-form">
+                        <div class="pit-ticket-form-container">
+                            <div class="pit-ticket-form-intro">
+                                    <p>
+                                        Wat wilt u reageren?
+                                    </p>
+                                    <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+                                        <div class="form-floating mb-3">
+                                            <textarea class="form-control" id="comment" type="text" placeholder="Comment" style="height: 10rem;" data-sb-validations="required"></textarea>
+                                            <label for="comment">Reageer...</label>
+                                            <div class="invalid-feedback" data-sb-feedback="comment:required">Comment is required.</div>
+                                        </div>
+                                        <input type="hidden" id="ticketid" th:field="${ticket.id}"/>
+                                        <div class="d-none" id="submitSuccessMessage">
+                                            <div class="text-center mb-3">
+                                                <div class="fw-bolder">Form submission successful!</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-none" id="submitErrorMessage">
+                                            <div class="text-center text-danger mb-3">Error sending message!</div>
+                                        </div>
+                                        <div class="d-grid">
+                                            <button class="btn btn-primary btn-lg" id="btnPlaceComment" type="submit">Reageer</button>
+                                        </div>
+                                    </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-4">
+            <div class="pit-side-menu">
+                <span class="side-header-title">Ticket informatie</span>
+                    <table class="table table-striped text-successtable-border border-light pit-info-table">
+                        <tbody>
+                        <tr>
+                            <th scope="row">Aangemaakt door</th>
+                            <td th:text="${ticket.questioner.fullName}"></td>
+
+                        </tr>
+                        <tr>
+                            <th scope="row">Prioritijd</th>
+                            <td th:text="${ticket.priority.name}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Status</th>
+                            <td th:text="${ticket.status.name}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Ticket ID</th>
+                            <td th:text="${ticket.id}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Gemaakt op</th>
+                            <td th:text="${#temporals.format(ticket.createdAt,'dd-MM-yyyy HH:mm')}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Laatste activiteit</th>
+                            <td th:text="${#temporals.format(ticket.updatedAt,'dd-MM-yyyy HH:mm')}"></td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Aantal reacties:</th>
+                            <td th:text="${ticket.comments.size()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+            </div>
+            <div class="pit-side-menu">
+                <span class="side-header-title">Contact Informatie</span>
+                <table class="table table-striped text-successtable-border border-light pit-info-table">
+                    <tbody>
+                    <tr th:each="contactDetail : ${listContactDetails}">
+                        <th scope="row"><span th:text="${contactDetail.contactType.name}"></span></th>
+                        <td><span th:text="${contactDetail.text}"></span></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+                <div class="pit-side-menu">
+                    <span class="side-header-title">Acties</span>
+                    <div class="pit-side-menu-container">
+                        <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/ticket/viewTickets">Product koppelen</a></div>
+                        <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/create-ticket">Status wijzigen naar Opgelost</a></div>
+                        <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+                            <br>
+                            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                                </symbol>
+                                <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+                                </symbol>
+                                <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                </symbol>
+                            </svg>
+
+                            <div class="alert alert-primary d-flex align-items-center" role="alert">
+                                <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                                <div>
+                                    De onderstaande knoppen zijn alleen zichtbaar voor administrators.
+                                </div>
+                            </div>
+
+                            <div class="pit-side-menu-item">
+                                <!-- Status wijzigen trigger -->
+                                <button type="button" class="btn w-100 btn-block btn-outline-primary" data-toggle="modal" data-target="#statusModal">
+                                    Status wijzigen
+                                </button>
+                            </div>
+                            <div class="pit-side-menu-item"><a class="btn btn-outline-primary">Medewerker toewijzen</a></div>
+                            <div class="pit-side-menu-item"><a class="btn btn-outline-primary">Prioriteit wijzigen</a></div>
+                            <div class="pit-side-menu-item"><a class="btn btn-outline-primary">Ticket verwijderen</a></div>
+
+                            <!-- Status wijzigen modal -->
+                                <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="statusModalLabel">Status Wijzigen</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form>
+                                                    <div class="form-group">
+                                                        <label>Huidige status:</label>
+                                                        <input type="text" class="form-control" placeholder="Huidige status">
+                                                        <label>Nieuwe status:</label>
+                                                        <input type="text" class="form-control" placeholder="Nieuwe status">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-success">Opslaan</button>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Sluiten</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+</div>
+<div th:replace="portal/fragments/general.html :: footer"></div>
+</main>
+
+<div th:replace="portal/fragments/general.html :: footerfiles"></div>
+</body>
+</html>

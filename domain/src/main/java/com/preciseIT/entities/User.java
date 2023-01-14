@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.AbstractAuditable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Collection;
 
 @Getter
 @Setter
@@ -32,6 +33,16 @@ public class User extends AbstractAuditable<User, Integer> {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
+    @ManyToOne
+    @JoinColumn(name = "company_id", referencedColumnName = "id")
+    private Company company;
+
+    @OneToMany(mappedBy = "user")
+    private Collection<Ticket> tickets;
+
+    @OneToMany(mappedBy = "user")
+    private Collection<ContactDetails> contactDetails;
+
     public User(String email, String firstName, String lastName, String password, Role role, String secret) {
         this.setCreatedDate(LocalDateTime.now());
         this.setLastModifiedDate(LocalDateTime.now());
@@ -50,7 +61,7 @@ public class User extends AbstractAuditable<User, Integer> {
         this.role = role;
     }
 
-    public User(String email, String firstName, String lastName, String password, Role role) {
+    public User(String email, String firstName, String lastName, String password, Role role, Company company) {
         this.setCreatedDate(LocalDateTime.now());
         this.setLastModifiedDate(LocalDateTime.now());
         this.email = email;
@@ -58,9 +69,10 @@ public class User extends AbstractAuditable<User, Integer> {
         this.lastName = lastName;
         this.password = password;
         this.role = role;
+        this.company = company;
     }
 
-    public User(String email, String firstName, String lastName, String password, String secret, Role role) {
+    public User(String email, String firstName, String lastName, String password, String secret, Role role, Company company) {
         this.setCreatedDate(LocalDateTime.now());
         this.setLastModifiedDate(LocalDateTime.now());
         this.email = email;
@@ -69,6 +81,11 @@ public class User extends AbstractAuditable<User, Integer> {
         this.password = password;
         this.secret = secret;
         this.role = role;
+        this.company = company;
+    }
+
+    public String getFullName(){
+        return getFirstName() + " " + getLastName();
     }
 
 }

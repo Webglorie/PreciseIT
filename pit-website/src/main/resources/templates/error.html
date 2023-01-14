@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Error - Precise IT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Precise IT Website"/>
+    <meta name="author" content="Bart Reijnders, Arjen Froma"/>
+
+    <div th:replace="fragments/general.html :: headerfiles"></div>
+
+
+</head>
+<body>
+<div th:replace="fragments/general.html :: header-menu"></div>
+<div class="px-4 py-5 my-5 pit-page-title">
+    <div class="container">
+        <h1 class="float-start">Nondeju een error</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row pit-home-starttext">
+        <div class="col-md-6">
+            <p>Er is een fout opgetreden, kijk in de error log voor meer informatie.<br><br><a href="/">Klik hier om terug te gaan naar de homepagina.</a></p>
+
+        </div>
+        <div class="col-md-6">
+            <img class="pit-error-image" src="/images/error-image.png">
+
+        </div>
+    </div>
+</div>
+<div th:replace="fragments/general.html :: footer"></div>
+</main>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+
+</body>
+</html>

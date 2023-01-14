@@ -26,13 +26,13 @@ public class TicketController {
 
     @GetMapping
     public Iterable<Ticket> getAllTickets() {
-         Iterable<Ticket> tickets = ticketService.findAllTickets();
+         Iterable<Ticket> tickets = ticketService.getAll();
          return tickets;
     }
 
     @GetMapping("/all")
     public String listAllTickets(Model model){
-        List<Ticket> tickets = (List<Ticket>) ticketService.findAllTickets();
+        List<Ticket> tickets = (List<Ticket>) ticketService.getAll();
         model.addAttribute("tickets", tickets);
         return "portal/portal-tickets";
     }

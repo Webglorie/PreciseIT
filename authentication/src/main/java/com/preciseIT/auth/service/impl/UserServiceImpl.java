@@ -6,6 +6,7 @@ import com.preciseIT.enums.Role;
 import com.preciseIT.repos.UserRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +21,24 @@ public class UserServiceImpl implements UserService {
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    private User getPrincipal() {
+        User user = null;
+
+        if (
+                SecurityContextHolder
+                        .getContext()
+                        .getAuthentication()
+                        .getPrincipal() instanceof User
+        ) {
+            user =
+                    (User) SecurityContextHolder
+                            .getContext()
+                            .getAuthentication()
+                            .getPrincipal();
+        }
+        return user;
     }
 
     @Override
@@ -50,6 +69,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User findById(String id) {
+        return userRepository.findById(Integer.parseInt(id));
     }
 
     @Override

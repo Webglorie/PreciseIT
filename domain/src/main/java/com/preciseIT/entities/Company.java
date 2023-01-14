@@ -1,61 +1,37 @@
 package com.preciseIT.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "company")
-public class Company {
+public class Company extends BaseEntity {
+
+    @Column(name = "id")
     @Id
-    @Column(name = "id", nullable = false)
-    private UUID id;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "createdAt", nullable = false, updatable = false)
-    @CreatedDate
-    private Date createdAt;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "lastModified", nullable = false)
-    @LastModifiedDate
-    private Date lastModified;
+    @GeneratedValue
+    private int id;
 
     @Column(name = "name")
     private String name;
 
-    public UUID getId() {
-        return id;
-    }
+    @OneToMany(mappedBy = "company")
+    private Collection<User> users;
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public Date getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Date getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(Date lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Company(String name) {
         this.name = name;
     }
 }

@@ -1,42 +1,241 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Ingelogd - Precise IT</title>
+    <title>Beheerportaal - Precise IT</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content="Precise IT Website"/>
     <meta name="author" content="Bart Reijnders, Arjen Froma"/>
 
-    <div th:replace="/portal/fragments/general.html :: headerfiles"></div>
-
+    <div th:replace="portal/fragments/general.html :: headerfiles"></div>
+    <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/cdb.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/cdbootstrap/js/bootstrap.min.js"></script>
 
 </head>
 <body>
-<div th:replace="/portal/fragments/general.html :: header-menu"></div>
+<div th:replace="portal/fragments/general.html :: header-menu"></div>
 <div class="px-4 py-5 my-5 pit-page-title">
     <div class="container">
-        <h1 class="float-start">Welkom ingelogde gebruiker!</h1>
+        <h1 class="float-start">Beheerportaal: Dashboard</h1>
     </div>
 </div>
 <div class="container">
     <div class="row pit-home-starttext">
-        <div class="col-md-6">
-            <p>Admin Portal.</p>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-12">
+            <div class="pit-title-box">
+                <span class="pit-header-title">Welkom in het beheerportaal, <span th:text="${user.fullName}"></span>!</span>
+                <div class="pit-title-box-container">
+                    <div class="pit-ticket-form">
+                        <div class="pit-ticket-form-container">
+                            <div class="pit-ticket-form-intro">
+                                <p>Via het beheerportaal van het helpdesk systeem van Precise IT kunnen alle gebruikers, bedrijven, tickets beheert worden. Bent u niet 100% zeker wat een knop doet? Vraag het dan eerst na bij een administrator.</p>
 
-            <p>
-                <a class="btn btn-outline-info" id="btnLogout">Logout</a>
-            </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+                </div>
+            <div class="row">
+                    <div class="col-4">
+                    <div class="pit-title-box">
+                        <span class="pit-header-title">Gebruiker Beheer</span>
+                        <div class="pit-title-box-container">
+                            <div class="pit-ticket-form">
+                                <div class="pit-ticket-form-container">
+                                    <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/create-ticket">Gebruiker aanmaken</a></div>
+                                    <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/ticket/viewTickets">Gebruiker aanpassen</a></div>
+                                    <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/admin/users/all">Alle gebruikers</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        </div>
+                    <div class="col-4">
+                    <div class="pit-title-box">
+                        <span class="pit-header-title">Melding Beheer</span>
+                        <div class="pit-title-box-container">
+                            <div class="pit-ticket-form">
+                                <div class="pit-ticket-form-container">
+                                    <div class="pit-ticket-form-container">
+                                        <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/admin/ticket/viewTickets">Melding aanpassen</a></div>
+                                        <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/admin/ticket/viewTickets">Alle meldingen</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="pit-title-box">
+                        <span class="pit-header-title">Bedrijf Beheer</span>
+                        <div class="pit-title-box-container">
+                            <div class="pit-ticket-form">
+                                <div class="pit-ticket-form-container">
+                                    <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/create-ticket">Bedrijf aanmaken</a></div>
+                                    <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/ticket/viewTickets">Bedrijf aanpassen</a></div>
+                                    <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/admin/users/all">Alle bedrijven</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+            <div class="row">
+                <div class="col-12">
+            <div class="pit-title-box">
+                <span class="pit-header-title">Status van alle meldingen</span>
+                <div class="pit-title-box-container">
+                    <div class="pit-ticket-form">
+                        <div class="pit-ticket-form-container">
+                            <div class="pit-ticket-form-intro">
+                                <p>Statistiek over de status van de binnengekomen meldingen tot nu toe.</p>
+                                <canvas id="chart"></canvas>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                </div>
+            </div>
+        <div class="col-4">
+            <!-- Account Sidebar-->
+            <div class="pit-side-menu">
+                <div class="author-card pb-3">
+                    <div class="author-card-cover" style="background-image: url(https://bootdey.com/img/Content/flores-amarillas-wallpaper.jpeg);"><span class="btn pt-2 btn-style-1 btn-sm" data-toggle="tooltip" title="" data-original-title="You currently have 290 Reward points to spend"><span th:text="${user.company.name}"></span></span></div>
+                    <div class="author-card-profile">
+                        <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams">
+                        </div>
+                        <div class="author-card-details">
+                            <h5 class="author-card-name text-lg"><span th:text="${user.fullName}"></span></h5><span class="author-card-position" th:text="${user.role.getAuthority()}">Joined February 06, 2017</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="wizard">
+                    <nav class="list-group list-group-flush">
+                        <a class="list-group-item" href="/portal/ticket/viewTickets">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="fa fa-tag mr-1 text-muted"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Mijn Meldingen</div>
+                                </div><span class="badge badge-secondary"><span th:text="${user.tickets.size()}"></span></span>
+                            </div>
+                        </a>
+                        <a class="list-group-item" href="#">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div><i class="fa fa-user mr-1 text-muted"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Profiel instellingen</div>
+                                </div>
+                            </div>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+            <div class="pit-side-menu">
+                <span class="side-header-title">Meldingen</span>
+                <div class="pit-side-menu-container">
+                    <table id="notificationTable">
+                        <tr>
+                            <td>Gepland server onderhoud 10-11-2022 na 18:00, mogelijk traagheid.</td>
+                        </tr>
+                        <tr class="table-secondary">
+                            <td>Binnenkort Bingoavond met de doorgewinterde bingoleider Bart!</td>
+                        </tr>
+                    </table>
+                    <div class="alert alert-primary d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Info:"><use xlink:href="#info-fill"/></svg>
+                    <div>
+                        De onderstaande knop is alleen zichtbaar voor administrators.
+                    </div>
+                        </div>
+
+
+                <div class="pit-side-menu-item">
+                    <!-- Status wijzigen trigger -->
+                    <button type="button" class="btn w-100 btn-block btn-outline-primary" data-toggle="modal" data-target="#statusModal">
+                        Melding toevoegen
+                    </button>
+                </div>
+
+                <!-- Status wijzigen modal -->
+                <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="statusModalLabel">Status Wijzigen</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label>Huidige status:</label>
+                                        <input type="text" class="form-control" placeholder="Huidige status">
+                                        <label>Nieuwe status:</label>
+                                        <input type="text" class="form-control" placeholder="Nieuwe status">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success">Opslaan</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Sluiten</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="pit-side-menu">
+                <span class="side-header-title">Snelle Links</span>
+                <div class="pit-side-menu-container">
+                    <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/create-ticket">Nieuwe melding maken</a></div>
+                    <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/ticket/viewTickets">Bekijk openstaande tickets</a></div>
+                    <div class="pit-side-menu-item"><a class="btn btn-outline-primary" href="/portal/create-ticketByHelpDesk">Maak ticket aan voor klant</a></div>
+                    <div class="pit-side-menu-item"> <a class="btn btn-outline-primary" id="btnLogout">Uitloggen</a></div>
+                </div>
+            </div>
 
         </div>
-        <div class="col-md-6">
-            <img src="../../images/contact-image.png">
 
-        </div>
     </div>
 </div>
-<div th:replace="/portal/fragments/general.html :: footer"></div>
-</main>
 
-<div th:replace="/portal/fragments/general.html :: footerfiles"></div>
+
+<div th:replace="portal/fragments/general.html :: footer"></div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+<div th:replace="portal/fragments/general.html :: footerfiles"></div>
+<script th:inline="javascript">
+    // var message = /*[[${listCountStatus}]]*/ 'default';
+    // console.log(message);
+    const ctx = document.getElementById("chart").getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: /*[[${listStatus}]]*/ 'default',
+            datasets: [{
+                label: 'Meldingen',
+                backgroundColor: 'rgba(161, 198, 247, 1)',
+                borderColor: 'rgb(47, 128, 237)',
+                data: /*[[${listCountStatus}]]*/ 'default',
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                    }
+                }]
+            }
+        },
+    });
+</script>
 </body>
 </html>
